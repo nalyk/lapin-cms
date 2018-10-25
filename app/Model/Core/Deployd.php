@@ -13,7 +13,7 @@ class Deployd
         $this->guzzle = $this->container['guzzle'];
     }
 
-    public function post(string $collection, array $data)
+    public function post(string $collection, string $id = null, array $data)
     {
 
     }
@@ -23,8 +23,16 @@ class Deployd
 
     }
 
-    public function get(string $collection, string $id = null, array $query = null)
+    /**
+     * Get values from Deployd API
+     * @param  string   $collection     collection name
+     * @param  string   $id             document id
+     * @param  string   $query          get/search query
+     * @return array
+     */
+    public function get(string $collection, string $id = null, string $query = null)
     {
+        //$this->container->monolog->warning(substr(strrchr(rtrim(__CLASS__, '\\'), '\\'), 1).': '.__FUNCTION__);
     	if ($id == null && $query == null) {
     		try {
     			$res = $this->guzzle->request('GET', $this->apiserver."/".$collection);
@@ -33,7 +41,23 @@ class Deployd
 			    echo Psr7\str($e->getRequest());
 			    echo Psr7\str($e->getResponse());
 			}
-    	}
+    	} elseif ($query == null) {
+            try {
+                $res = $this->guzzle->request('GET', $this->apiserver."/".$collection."/".$id);
+                $response = json_decode($res->getBody(), true);
+            } catch (ClientException $e) {
+                echo Psr7\str($e->getRequest());
+                echo Psr7\str($e->getResponse());
+            }
+        } else {
+            try {
+                $res = $this->guzzle->request('GET', $this->apiserver."/".$collection."/?".$query);
+                $response = json_decode($res->getBody(), true);
+            } catch (ClientException $e) {
+                echo Psr7\str($e->getRequest());
+                echo Psr7\str($e->getResponse());
+            }
+        }
 
     	return $response;
     }

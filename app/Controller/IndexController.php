@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-use App\Model\Core\Deployd;
+//use App\Model\Core\Deployd;
 
 class IndexController
 {
@@ -31,7 +31,7 @@ class IndexController
     {
         //$api =  new Deployd();
         //$api = $this->container['deployd'];
-        $news = $this->container->deployd->get("news", null, null);
+        $news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $data = ['news' => $news];
         return $this->container->twig->render($response, "index.html.twig", $data);
     }

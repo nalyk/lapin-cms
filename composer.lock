@@ -1,7 +1,7 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
     "content-hash": "e1d72c8f596273c23d34a429f8c078e8",
@@ -500,7 +500,7 @@
         },
         {
             "name": "illuminate/container",
-            "version": "v5.7.10",
+            "version": "v5.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/container.git",
@@ -545,7 +545,7 @@
         },
         {
             "name": "illuminate/contracts",
-            "version": "v5.7.10",
+            "version": "v5.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/contracts.git",
@@ -589,16 +589,16 @@
         },
         {
             "name": "illuminate/database",
-            "version": "v5.7.10",
+            "version": "v5.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/database.git",
-                "reference": "84beb856e86272626c745ad8138ea4c17014b676"
+                "reference": "95300422e4607bbf1b06baf141d83c2d6e289bd1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/database/zipball/84beb856e86272626c745ad8138ea4c17014b676",
-                "reference": "84beb856e86272626c745ad8138ea4c17014b676",
+                "url": "https://api.github.com/repos/illuminate/database/zipball/95300422e4607bbf1b06baf141d83c2d6e289bd1",
+                "reference": "95300422e4607bbf1b06baf141d83c2d6e289bd1",
                 "shasum": ""
             },
             "require": {
@@ -644,20 +644,20 @@
                 "orm",
                 "sql"
             ],
-            "time": "2018-10-19T04:35:29+00:00"
+            "time": "2018-10-24T12:48:02+00:00"
         },
         {
             "name": "illuminate/filesystem",
-            "version": "v5.7.10",
+            "version": "v5.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/filesystem.git",
-                "reference": "e5af2cdd6848bea85ee458ffc0e670dbad29d03d"
+                "reference": "cbb5650be36d7370f7ae5f039d2143952fa58f51"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/e5af2cdd6848bea85ee458ffc0e670dbad29d03d",
-                "reference": "e5af2cdd6848bea85ee458ffc0e670dbad29d03d",
+                "url": "https://api.github.com/repos/illuminate/filesystem/zipball/cbb5650be36d7370f7ae5f039d2143952fa58f51",
+                "reference": "cbb5650be36d7370f7ae5f039d2143952fa58f51",
                 "shasum": ""
             },
             "require": {
@@ -696,11 +696,11 @@
             ],
             "description": "The Illuminate Filesystem package.",
             "homepage": "https://laravel.com",
-            "time": "2018-10-10T12:52:25+00:00"
+            "time": "2018-10-24T12:49:16+00:00"
         },
         {
             "name": "illuminate/support",
-            "version": "v5.7.10",
+            "version": "v5.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/support.git",
@@ -759,7 +759,7 @@
         },
         {
             "name": "illuminate/translation",
-            "version": "v5.7.10",
+            "version": "v5.7.11",
             "source": {
                 "type": "git",
                 "url": "https://github.com/illuminate/translation.git",
