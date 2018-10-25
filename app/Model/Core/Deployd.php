@@ -13,18 +13,51 @@ class Deployd
         $this->guzzle = $this->container['guzzle'];
     }
 
-    public function post(string $collection, string $id = null, array $data)
+    /**
+     * Post object to Deployd API
+     * @param  string   $collection     collection name
+     * @param  array    $data           object data
+     * @return array
+     */
+    public function post(string $collection, array $data)
     {
-
-    }
-
-    public function put(string $collection, array $data)
-    {
-
+        try {
+            $res = $this->guzzle->request("POST", $this->apiserver."/".$collection, [
+                "form_params" => $data
+            ]);
+            $response = json_decode($res->getBody(), true);
+        } catch (ClientException $e) {
+            echo Psr7\str($e->getRequest());
+            echo Psr7\str($e->getResponse());
+        }
+        
+        return $response;
     }
 
     /**
-     * Get values from Deployd API
+     * Update object in Deployd API
+     * @param  string   $collection     collection name
+     * @param  string   $id             document id
+     * @param  array    $data           object data
+     * @return array
+     */
+    public function put(string $collection, string $id, array $data)
+    {
+        try {
+            $res = $this->guzzle->request("PUT", $this->apiserver."/".$collection."/".$id, [
+                "form_params" => $data
+            ]);
+            $response = json_decode($res->getBody(), true);
+        } catch (ClientException $e) {
+            echo Psr7\str($e->getRequest());
+            echo Psr7\str($e->getResponse());
+        }
+        
+        return $response;
+    }
+
+    /**
+     * Get object(s) from Deployd API
      * @param  string   $collection     collection name
      * @param  string   $id             document id
      * @param  string   $query          get/search query
@@ -35,7 +68,7 @@ class Deployd
         //$this->container->monolog->warning(substr(strrchr(rtrim(__CLASS__, '\\'), '\\'), 1).': '.__FUNCTION__);
     	if ($id == null && $query == null) {
     		try {
-    			$res = $this->guzzle->request('GET', $this->apiserver."/".$collection);
+    			$res = $this->guzzle->request("GET", $this->apiserver."/".$collection);
 	            $response = json_decode($res->getBody(), true);
 			} catch (ClientException $e) {
 			    echo Psr7\str($e->getRequest());
@@ -43,7 +76,7 @@ class Deployd
 			}
     	} elseif ($query == null) {
             try {
-                $res = $this->guzzle->request('GET', $this->apiserver."/".$collection."/".$id);
+                $res = $this->guzzle->request("GET", $this->apiserver."/".$collection."/".$id);
                 $response = json_decode($res->getBody(), true);
             } catch (ClientException $e) {
                 echo Psr7\str($e->getRequest());
@@ -51,7 +84,7 @@ class Deployd
             }
         } else {
             try {
-                $res = $this->guzzle->request('GET', $this->apiserver."/".$collection."/?".$query);
+                $res = $this->guzzle->request("GET", $this->apiserver."/".$collection."/?".$query);
                 $response = json_decode($res->getBody(), true);
             } catch (ClientException $e) {
                 echo Psr7\str($e->getRequest());
@@ -62,9 +95,23 @@ class Deployd
     	return $response;
     }
 
-    public function del(string $collection, array $data)
+    /**
+     * Delete object from Deployd API
+     * @param  string   $collection     collection name
+     * @param  string   $id             document id
+     * @return array
+     */
+    public function del(string $collection, string $id)
     {
+        try {
+            $res = $this->guzzle->request("DELETE", $this->apiserver."/".$collection."/".$id);
+            $response = json_decode($res->getBody(), true);
+        } catch (ClientException $e) {
+            echo Psr7\str($e->getRequest());
+            echo Psr7\str($e->getResponse());
+        }
 
+        return $response;
     }
 
 }
