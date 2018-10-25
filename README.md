@@ -1,6 +1,6 @@
 # Lapin CMS
 
-This is a CMS baset on Slim Framework (with MVC pattern), Deployd for the backend API and third-party libraries.
+This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backend API and third-party libraries.
 
 **Documentation is still in progress. Hold on.**
 
