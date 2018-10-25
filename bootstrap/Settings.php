@@ -63,6 +63,7 @@ class Settings
         $this->configureTimezone();
         $this->configureDatabase();
         $this->configureMailer();
+        $this->configureDeployd();
     }
 
     /**
@@ -191,6 +192,20 @@ class Settings
         $config['mail']['smtp']['password'] = getenv('MAIL_SMTP_PASSWORD');
         $config['mail']['smtp']['protocol'] = getenv('MAIL_SMTP_PROTOCOL');
         $config['mail']['smtp']['port']     = getenv('MAIL_SMTP_PORT');
+
+        $this->setConfig($config);
+    }
+
+    /**
+     * Configure Deployd
+     * @return void
+     */
+    public function configureDeployd()
+    {
+        $config = [];
+
+        $config['dpd']['host']      = getenv('DPD_HOST');
+        $config['dpd']['protocol']  = getenv('DPD_PROTOCOL');
 
         $this->setConfig($config);
     }

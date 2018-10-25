@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+use App\Model\Core\Deployd;
 
 class IndexController
 {
@@ -28,6 +29,10 @@ class IndexController
      */
     public function index($request, $response, $args)
     {
-        return $this->container->twig->render($response, "index.html.twig");
+        //$api =  new Deployd();
+        //$api = $this->container['deployd'];
+        $news = $this->container->deployd->get("news", null, null);
+        $data = ['news' => $news];
+        return $this->container->twig->render($response, "index.html.twig", $data);
     }
 }

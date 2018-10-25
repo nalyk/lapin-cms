@@ -54,7 +54,9 @@ class ContainerServices
         $this->registerCsrf();
         $this->registerDatabase();
         $this->registerEloquent();
+        $this->registerDeployd();
         $this->registerMailer();
+        $this->registerGuzzle();
         $this->registerMonolog();
         $this->registerSession();
 
@@ -159,6 +161,21 @@ class ContainerServices
     }
 
     /**
+     * Register 'deployd' on the container
+     * @return void
+     */
+    public function registerDeployd()
+    {
+        $this->registerService('deployd', function () {
+            $data = $this->container['settings']['dpd'];
+            $apiserver = $data['protocol']."://".$data['host'];
+            $deployd = new \App\Model\Core\Deployd($this->container, $apiserver);
+
+            return $deployd;
+        });
+    }
+
+    /**
      * Register 'mailer' on the container
      * @return void
      */
@@ -170,6 +187,20 @@ class ContainerServices
             return $mailer;
         });
     }
+
+    /**
+     * Register 'guzzle' on the container
+     * @return void
+     */
+    public function registerGuzzle()
+    {
+        $this->registerService('guzzle', function () {
+            $guzzle = new \GuzzleHttp\Client();
+
+            return $guzzle;
+        });
+    }
+    
 
     /**
      * Register 'monolog' on the container
