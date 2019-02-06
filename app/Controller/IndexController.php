@@ -29,10 +29,8 @@ class IndexController
      */
     public function index($request, $response, $args)
     {
-        //$api =  new Deployd();
-        //$api = $this->container['deployd'];
         $news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 }

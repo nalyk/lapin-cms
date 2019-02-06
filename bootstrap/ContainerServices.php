@@ -374,6 +374,21 @@ class ContainerServices
             $translatorFunction = new \Twig_Function('translator', array(new Twig\CustomFunction\Translator($this->container), 'index'));
             $twig->getEnvironment()->addFunction($translatorFunction);
 
+            /**
+            * Custom Twig Path Namespace
+            */
+
+            /**
+            * Custom Twig Path Namespace to use in "render" controllers
+            *
+            * Usage:
+            * return $this->container->twig->render($response, "@site/index.html.twig", $data);
+            * return $this->container->twig->render($response, "@admin/index.html.twig", $data);
+            *
+            */
+            $twig->getLoader()->addPath($paths['templates'].'/admin','admin');
+            $twig->getLoader()->addPath($paths['templates'].'/site','site');
+
             return $twig;
         });
     }
