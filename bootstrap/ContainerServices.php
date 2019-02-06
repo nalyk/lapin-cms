@@ -167,9 +167,10 @@ class ContainerServices
     public function registerDeployd()
     {
         $this->registerService('deployd', function () {
-            $data = $this->container['settings']['dpd'];
-            $apiserver = $data['protocol']."://".$data['host'];
-            $deployd = new \App\Model\Core\Deployd($this->container, $apiserver);
+            //$data = $this->container['settings']['dpd'];
+            //$apiserver = $data['protocol']."://".$data['host'];
+            //$deployd = new \App\Model\Core\Deployd($this->container, $apiserver);
+            $deployd = new \App\Model\Core\Deployd($this->container);
 
             return $deployd;
         });

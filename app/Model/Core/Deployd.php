@@ -4,12 +4,26 @@ namespace App\Model\Core;
 
 class Deployd
 {
-    protected $apiserver;
+    /**
+     * Dependency container provided by Slim
+     * @var \Slim\Container
+     */
+    protected $container;
 
-    public function __construct($container, $apiserver)
+    /**
+     * DPD settings
+     * @var array
+     */
+    protected $data;
+
+    public function __construct($container)
     {
     	$this->container = $container;
-        $this->apiserver = $apiserver;
+
+        //$data = $this->container['settings']['dpd'];
+        //$apiserver = $data['protocol']."://".$data['host'];
+        $this->data = $this->ci->get('settings')['dpd'];
+        $this->apiserver = $this->data['protocol']."://".$this->data['host'];
         $this->guzzle = $this->container['guzzle'];
     }
 

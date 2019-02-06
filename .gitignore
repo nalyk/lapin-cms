@@ -7,3 +7,5 @@ lapine-api/.dpd/
 lapine-api/data/
 # lapine-api/production.js
 
+composer.json
+composer.lock
