@@ -13,7 +13,6 @@ if (PHP_SAPI == 'cli') {
     */
     
     $climate->out('This prints to the terminal.');
-    $climate->animation('hello')->enterFrom('right');
 
 }
 ?>
