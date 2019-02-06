@@ -14,16 +14,13 @@ class Deployd
      * DPD settings
      * @var array
      */
-    protected $data;
+    protected $settings;
 
     public function __construct($container)
     {
     	$this->container = $container;
-
-        //$data = $this->container['settings']['dpd'];
-        //$apiserver = $data['protocol']."://".$data['host'];
-        $this->data = $this->ci->get('settings')['dpd'];
-        $this->apiserver = $this->data['protocol']."://".$this->data['host'];
+        $this->settings = $this->container->get('settings')['dpd'];
+        $this->apiserver = $this->settings['protocol']."://".$this->settings['host'];
         $this->guzzle = $this->container['guzzle'];
     }
 
