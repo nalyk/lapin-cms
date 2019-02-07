@@ -22,6 +22,8 @@ This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backen
 - `web` - contains your front-end related files
   - `templates` - contains your templates provided by [Twig](https://twig.symfony.com)
 
+php -S localhost:8080 -t public public/index.php
+
 ## Added libs
 https://github.com/DavidePastore/Slim-Validation
-  
+https://github.com/nahid/jsonq 
