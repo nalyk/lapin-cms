@@ -31,6 +31,6 @@ class IndexController
     {
         $news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
+        return $this->container->twig->render($response, "@site/index.html.twig", $data);
     }
 }

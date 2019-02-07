@@ -21,3 +21,7 @@ This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backen
 - `storage` - used by the boilerplate to store Cache and Logs (must be **writable**)
 - `web` - contains your front-end related files
   - `templates` - contains your templates provided by [Twig](https://twig.symfony.com)
+
+## Added libs
+https://github.com/DavidePastore/Slim-Validation
+  

@@ -69,7 +69,7 @@ class Middlewares
      */
     public function registerIpAddress()
     {
-        $this->app->add(new \RKA\Middleware\IpAddress(true));
+        $this->app->add(new \RKA\Middleware\IpAddress(true, []));
     }
 
     /**
