@@ -19,7 +19,10 @@
         "nahid/jsonq": "^5.2",
         "zumba/json-serializer": "^2.2",
         "phlak/twine": "^4.0",
-        "jenssegers/date": "^3.4"
+        "jenssegers/date": "^3.4",
+        "ramsey/uuid": "^3.8",
+        "zguillez/slim-mobile-detect": "^1.0",
+        "jaybizzle/crawler-detect": "^1.2"
     },
     "autoload": {
         "psr-4": {

@@ -31,6 +31,13 @@ php -S localhost:8080 -t public public/index.php
 - https://github.com/PHLAK/Twine
 - https://github.com/jenssegers/date
     - echo $this->container->carbon->now()->format('l j F Y H:i:s');
+- https://github.com/ramsey/uuid
+- https://github.com/zguillez/slim-mobile-detect
+    - $request->isMobile()
+    - $request->isTablet()
+    - $request->isAndroidOS()
+- https://github.com/jaybizzle/crawler-detect
+
 
 * https://github.com/jwage/purl
 * https://github.com/jobbyphp/jobby

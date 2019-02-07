@@ -35,6 +35,7 @@ class Middlewares
         $this->registerCsrf();
         $this->registerSession();
         $this->registerIpAddress();
+        $this->registerAgent();
         $this->registerTrailingSlash();
         $this->registerErrorMiddleware();
     }
@@ -70,6 +71,21 @@ class Middlewares
     public function registerIpAddress()
     {
         $this->app->add(new \RKA\Middleware\IpAddress(true, []));
+    }
+
+    /**
+     * Register User Agent (https://github.com/zguillez/slim-mobile-detect) middleware
+     * @return void
+     */
+    public function registerAgent()
+    {
+        $this->app->add(function ($request, $response, $next) {
+            $request  = new \Slim\Http\MobileRequest($request);
+	        $response = new \Slim\Http\MobileResponse($response);
+        
+            return $next($request, $response);
+        });
+
     }
 
     /**
