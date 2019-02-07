@@ -30,7 +30,7 @@ php -S localhost:8080 -t public public/index.php
 - https://github.com/zumba/json-serializer
 - https://github.com/PHLAK/Twine
 - https://github.com/jenssegers/date
--- echo $this->container->carbon->now()->format('l j F Y H:i:s');
+    - echo $this->container->carbon->now()->format('l j F Y H:i:s');
 
 * https://github.com/jwage/purl
 * https://github.com/jobbyphp/jobby
