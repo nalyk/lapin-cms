@@ -16,7 +16,10 @@
         "guzzlehttp/guzzle": "^6.3",
         "davidepastore/slim-validation": "^0.5.1",
         "akrabat/ip-address-middleware": "^1.0",
-        "nahid/jsonq": "^5.2"
+        "nahid/jsonq": "^5.2",
+        "zumba/json-serializer": "^2.2",
+        "phlak/twine": "^4.0",
+        "jenssegers/date": "^3.4"
     },
     "autoload": {
         "psr-4": {

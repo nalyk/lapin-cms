@@ -57,6 +57,8 @@ class ContainerServices
         $this->registerDeployd();
         $this->registerMailer();
         $this->registerGuzzle();
+        $this->registerSerializer();
+        $this->registerCarbon();
         $this->registerMonolog();
         $this->registerSession();
 
@@ -197,7 +199,35 @@ class ContainerServices
 
             return $guzzle;
         });
-    }        
+    }
+
+    /**
+     * Register 'serializer' on the container
+     * @return void
+     */
+    public function registerSerializer()
+    {
+        $this->registerService('serializer', function () {
+            $serializer = new \Zumba\JsonSerializer\JsonSerializer();
+
+            return $serializer;
+        });
+    }
+
+    /**
+     * Register 'carbon' on the container
+     * @return void
+     */
+    public function registerCarbon()
+    {
+        $this->registerService('carbon', function () {
+            $locale = $this->container['settings']['locale'];
+            $carbon = new \Jenssegers\Date\Date;
+            $carbon->setLocale('ro');
+
+            return $carbon;
+        });
+    }
 
     /**
      * Register 'monolog' on the container

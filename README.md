@@ -25,5 +25,12 @@ This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backen
 php -S localhost:8080 -t public public/index.php
 
 ## Added libs
-https://github.com/DavidePastore/Slim-Validation
-https://github.com/nahid/jsonq 
+- https://github.com/DavidePastore/Slim-Validation
+- https://github.com/nahid/jsonq 
+- https://github.com/zumba/json-serializer
+- https://github.com/PHLAK/Twine
+- https://github.com/jenssegers/date
+-- echo $this->container->carbon->now()->format('l j F Y H:i:s');
+
+* https://github.com/jwage/purl
+* https://github.com/jobbyphp/jobby
