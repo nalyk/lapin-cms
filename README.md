@@ -40,6 +40,6 @@ php -S localhost:8080 -t public public/index.php
 - https://github.com/bnf/slim3-psr15
 
 
-## Libs to watch
+## Libs to watch / install later
 - https://github.com/jwage/purl
 - https://github.com/jobbyphp/jobby
