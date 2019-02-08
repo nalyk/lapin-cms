@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Controller;
-//use App\Model\Core\Deployd;
 
 class IndexController
 {
