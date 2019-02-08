@@ -70,6 +70,7 @@ class ContainerServices
         $this->registerTranslator();
         $this->registerTwig();
         $this->registerUtil();
+        $this->registerPsr15();
 
         /**
          * Register handlers
@@ -429,6 +430,19 @@ class ContainerServices
             $util = new \App\Helper\Util();
 
             return $util;
+        });
+    }
+
+    /**
+     * Register 'callableResolver' (psr-15) on the container
+     * @return void
+     */
+    public function registerPsr15()
+    {
+        $this->registerService('callableResolver', function () {
+            $callableResolver = new \Bnf\Slim3Psr15\CallableResolver($this->container);
+
+            return $callableResolver;
         });
     }
 

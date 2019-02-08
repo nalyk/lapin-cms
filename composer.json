@@ -22,7 +22,8 @@
         "jenssegers/date": "^3.4",
         "ramsey/uuid": "^3.8",
         "zguillez/slim-mobile-detect": "^1.0",
-        "jaybizzle/crawler-detect": "^1.2"
+        "jaybizzle/crawler-detect": "^1.2",
+        "bnf/slim3-psr15": "^1.1"
     },
     "autoload": {
         "psr-4": {

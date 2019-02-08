@@ -2,6 +2,11 @@
 
 namespace Bootstrap;
 
+use \Psr\Http\Message\ServerRequestInterface as Request;
+use \Psr\Http\Message\ResponseInterface as Response;
+use \Psr\Http\Server\MiddlewareInterface as Middleware;
+use \Psr\Http\Server\RequestHandlerInterface as RequestHandler;
+
 class Middlewares
 {
     /**
@@ -81,9 +86,18 @@ class Middlewares
     {
         $this->app->add(function ($request, $response, $next) {
             $request  = new \Slim\Http\MobileRequest($request);
-	        $response = new \Slim\Http\MobileResponse($response);
+            $response = new \Slim\Http\MobileResponse($response);
         
             return $next($request, $response);
+        });
+
+        // custom PSR-15 Middleware example
+        $this->app->add(new class implements Middleware {
+            public function process(Request $request, RequestHandler $handler): Response
+            {
+                $request = $request->withAttribute('msg', 'Hello');
+                return $handler->handle($request);
+            }
         });
 
     }
