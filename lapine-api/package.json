@@ -3,8 +3,10 @@
     "node": ">= 4.0"
   },
   "dependencies": {
-    "deployd": "^1.0.0",
+    "deployd": "^1.1.2",
+    "dpd-clientlib": "^0.0.1",
+    "dpd-count": "0.0.1",
     "dpd-dashboard": "^0.0.1",
-    "dpd-clientlib": "^0.0.1"
+    "dpd-event": "^1.1.2"
   }
 }

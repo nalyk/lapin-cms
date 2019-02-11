@@ -22,7 +22,15 @@ This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backen
 - `web` - contains your front-end related files
   - `templates` - contains your templates provided by [Twig](https://twig.symfony.com)
 
-php -S localhost:8080 -t public public/index.php
+## php -S localhost:8080 -t public public/index.php
+
+## Routes
+### Deployd Objects
+- /deployd/new - GET - new object form
+- /deployd/create - POST - new object
+- /deployd/update - PUT - update object
+- /deployd/edit/{id} - GET - edit object form
+- /deployd/delete/{id} - DELETE - delete object
 
 ## Added libs
 - https://github.com/DavidePastore/Slim-Validation
@@ -38,6 +46,7 @@ php -S localhost:8080 -t public public/index.php
     - $request->isAndroidOS()
 - https://github.com/jaybizzle/crawler-detect
 - https://github.com/bnf/slim3-psr15
+- https://github.com/mikehaertl/php-shellcommand
 
 
 ## Libs to watch / install later

@@ -23,7 +23,8 @@
         "ramsey/uuid": "^3.8",
         "zguillez/slim-mobile-detect": "^1.0",
         "jaybizzle/crawler-detect": "^1.2",
-        "bnf/slim3-psr15": "^1.1"
+        "bnf/slim3-psr15": "^1.1",
+        "mikehaertl/php-shellcommand": "^1.4"
     },
     "autoload": {
         "psr-4": {
