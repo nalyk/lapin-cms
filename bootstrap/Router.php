@@ -29,7 +29,7 @@ class Router
 
         $this->app->group('/admin', function (\Slim\App $app) {
 
-            $app->get('[/]', \App\Controller\AdminController::class . ':index')->setName('admin_new');
+            $app->get('[/]', \App\Controller\AdminController::class . ':index')->setName('admin_index');
 
             // deployd objects
             $app->get('/deployd/new', \App\Controller\DeploydController::class . ':new')->setName('deployd_new');
