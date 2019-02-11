@@ -2,9 +2,6 @@
 
 namespace Bootstrap;
 
-use App\Controller\IndexController;
-use App\Controller\DeploydController;
-
 class Router
 {
     /**
@@ -28,13 +25,18 @@ class Router
      */
     public function registerRoutes()
     {
-        $this->app->get('/', IndexController::class . ':index')->setName('index');
+        $this->app->get('/', \App\Controller\IndexController::class . ':index')->setName('index');
 
-        // deployd objects
-        $this->app->get('/deployd/new', DeploydController::class . ':index')->setName('deployd_new');
-        $this->app->post('/deployd/create', DeploydController::class . ':index')->setName('deployd_create');
-        $this->app->post('/deployd/update', DeploydController::class . ':index')->setName('deployd_update');
-        $this->app->get('/deployd/edit/{id}', DeploydController::class . ':index')->setName('deployd_edit');
-        $this->app->post('/deployd/delete/{id}', DeploydController::class . ':index')->setName('deployd_delete');
+        $this->app->group('/admin', function (\Slim\App $app) {
+
+            $app->get('[/]', \App\Controller\AdminController::class . ':index')->setName('admin_new');
+
+            // deployd objects
+            $app->get('/deployd/new', \App\Controller\DeploydController::class . ':new')->setName('deployd_new');
+            $app->post('/deployd/create', \App\Controller\DeploydController::class . ':create')->setName('deployd_create');
+            $app->post('/deployd/update', \App\Controller\DeploydController::class . ':update')->setName('deployd_update');
+            $app->get('/deployd/edit/{id}', \App\Controller\DeploydController::class . ':edit')->setName('deployd_edit');
+            $app->post('/deployd/delete/{id}', \App\Controller\DeploydController::class . ':delete')->setName('deployd_delete');
+        });
     }
 }
