@@ -25,18 +25,16 @@ class Router
      */
     public function registerRoutes()
     {
+
         $this->app->get('/', \App\Controller\IndexController::class . ':index')->setName('index');
 
-        $this->app->group('/admin', function (\Slim\App $app) {
+        $this->app->get('/admin/dashboard', \App\Controller\AdminController::class . ':dashboard')->setName('admin_index');
 
-            $app->get('[/]', \App\Controller\AdminController::class . ':index')->setName('admin_index');
-
-            // deployd objects
-            $app->get('/deployd/new', \App\Controller\DeploydController::class . ':new')->setName('deployd_new');
-            $app->post('/deployd/create', \App\Controller\DeploydController::class . ':create')->setName('deployd_create');
-            $app->post('/deployd/update', \App\Controller\DeploydController::class . ':update')->setName('deployd_update');
-            $app->get('/deployd/edit/{id}', \App\Controller\DeploydController::class . ':edit')->setName('deployd_edit');
-            $app->post('/deployd/delete/{id}', \App\Controller\DeploydController::class . ':delete')->setName('deployd_delete');
-        });
+        // deployd objects
+        $this->app->get('/admin/deployd/new', \App\Controller\DeploydController::class . ':new')->setName('deployd_new');
+        $this->app->post('/admin/deployd/create', \App\Controller\DeploydController::class . ':create')->setName('deployd_create');
+        $this->app->post('/admin/deployd/update', \App\Controller\DeploydController::class . ':update')->setName('deployd_update');
+        $this->app->get('/admin/deployd/edit/{id}', \App\Controller\DeploydController::class . ':edit')->setName('deployd_edit');
+        $this->app->post('/admin/deployd/delete/{id}', \App\Controller\DeploydController::class . ':delete')->setName('deployd_delete');
     }
 }

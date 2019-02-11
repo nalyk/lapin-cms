@@ -20,18 +20,18 @@ class AdminController
     }
 
     /**
-     * This method is called when the user enters the `/` route
+     * This method is called when the user enters the `/admin/dashboard` route
      * @param  \Psr\Http\Message\ServerRequestInterface $request   PSR7 request
      * @param  \Psr\Http\Message\ResponseInterface      $response  PSR7 response
      * @param  array                                    $args      Route parameters
      * @return \Psr\Http\Message\ResponseInterface
      */
-    public function index($request, $response, $args)
+    public function dashboard($request, $response, $args)
     {
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $news["msg"] = $request->getAttribute('msg');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
 }
