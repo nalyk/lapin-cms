@@ -10,7 +10,6 @@
  *
  * You can find more information on Bootstrap\Application class.
  */
-
 require __DIR__ . '/../vendor/autoload.php';
 
 $application = new Bootstrap\Application;

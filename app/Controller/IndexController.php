@@ -17,6 +17,7 @@ class IndexController
     public function __construct($container)
     {
         $this->container = $container;
+        $this->logger = $this->container->get('monolog');
     }
 
     /**
@@ -28,9 +29,10 @@ class IndexController
      */
     public function index($request, $response, $args)
     {
+        $this->logger->warning(substr(strrchr(rtrim(__CLASS__, '\\'), '\\'), 1).': '.__FUNCTION__);
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $news["msg"] = $request->getAttribute('msg');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "@site/index.html.twig", $data);
+        return $this->container->twig->render($response, "site-theme/index.html.twig", $data);
     }
 }

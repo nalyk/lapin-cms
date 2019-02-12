@@ -17,6 +17,7 @@ class AdminController
     public function __construct($container)
     {
         $this->container = $container;
+        $this->logger = $this->container->get('monolog');
     }
 
     /**
@@ -28,10 +29,12 @@ class AdminController
      */
     public function dashboard($request, $response, $args)
     {
+        $this->logger->warning(substr(strrchr(rtrim(__CLASS__, '\\'), '\\'), 1).': '.__FUNCTION__);
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
-        $news["msg"] = $request->getAttribute('msg');
+        //$news["msg"] = $request->getAttribute('msg');
+        $news = null;
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
+        return $this->container->twig->render($response, "admin-theme/index.html.twig", $data);
     }
 
 }
