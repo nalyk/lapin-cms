@@ -413,8 +413,8 @@ class ContainerServices
             * return $this->container->twig->render($response, "@admin/index.html.twig", $data);
             *
             */
-            //$twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/admin-theme','admin');
-            //$twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/site-theme','site');
+            $twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/admin-theme','admin');
+            $twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/site-theme','site');
 
             return $twig;
         });

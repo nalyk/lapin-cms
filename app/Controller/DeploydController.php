@@ -17,6 +17,7 @@ class DeploydController
     public function __construct($container)
     {
         $this->container = $container;
+        $this->logger = $this->container->get('monolog');
     }
 
     /**
