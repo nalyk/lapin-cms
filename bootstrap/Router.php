@@ -36,7 +36,7 @@ class Router
         $this->app->group('/admin', function() {
             $this->get('/dashboard', AdminController::class . ':dashboard')->setName('admin_dashboard');
             // deployd objects
-            $this->app->group('/deployd', function() {
+            $this->group('/deployd', function() {
                 $this->get('/new', DeploydController::class . ':new')->setName('deployd_new');
                 $this->post('/create', DeploydController::class . ':create')->setName('deployd_create');
                 $this->post('/update', DeploydController::class . ':update')->setName('deployd_update');
