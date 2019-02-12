@@ -31,7 +31,7 @@ class AdminController
     {
         $news = null;
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "admin-theme/index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
 }

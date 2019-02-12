@@ -32,6 +32,6 @@ class IndexController
         $this->logger->warning(substr(strrchr(rtrim(__CLASS__, '\\'), '\\'), 1).': '.__FUNCTION__);
         $news["msg"] = $request->getAttribute('msg');        
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "site-theme/index.html.twig", $data);
+        return $this->container->twig->render($response, "@site/index.html.twig", $data);
     }
 }

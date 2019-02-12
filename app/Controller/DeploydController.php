@@ -32,7 +32,7 @@ class DeploydController
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $news["msg"] = $request->getAttribute('msg');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
     /**
@@ -47,7 +47,7 @@ class DeploydController
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $news["msg"] = $request->getAttribute('msg');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
     /**
@@ -62,7 +62,7 @@ class DeploydController
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $news["msg"] = $request->getAttribute('msg');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
     /**
@@ -77,7 +77,7 @@ class DeploydController
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $news["msg"] = $request->getAttribute('msg');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
     /**
@@ -92,7 +92,7 @@ class DeploydController
         //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
         $news["msg"] = $request->getAttribute('msg');
         $data = ['news' => $news];
-        return $this->container->twig->render($response, "index.html.twig", $data);
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
 }
