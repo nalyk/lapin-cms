@@ -92,20 +92,20 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ path_for('admin_dashboard') }}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>Dashboard</span>
+          <span>{{ translator('site.dashboard') }}</span>
         </a>
       </li>
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="dpdDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-database"></i>
-          <span>DPD Objects</span>
+          <span>{{ translator('site.dpd_objects') }}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="dpdDropdown">
           <h6 class="dropdown-header">Management:</h6>
-          <a class="dropdown-item" href="{{ path_for('deployd_new') }}">Nou</a>
-          <a class="dropdown-item" href="{{ path_for('deployd_list') }}">Lista</a>
+          <a class="dropdown-item" href="{{ path_for('deployd_new') }}">{{ translator('site.new_s_m') }}</a>
+          <a class="dropdown-item" href="{{ path_for('deployd_list') }}">{{ translator('site.list') }}</a>
           <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">Sincronizare:</h6>
+          <h6 class="dropdown-header">{{ translator('site.synchronization') }}:</h6>
           <a class="dropdown-item" href="#">404 Page</a>
           <a class="dropdown-item" href="#">Blank Page</a>
         </div>
@@ -113,7 +113,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="configDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-cog"></i>
-          <span>Configurare</span>
+          <span>{{ translator('site.configuration') }}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="configDropdown">
           <h6 class="dropdown-header">Text:</h6>
