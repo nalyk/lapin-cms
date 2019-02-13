@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'dashboard' => 'Panou',
+    'dashboard' => 'panou',
     'management' => 'Management',
     'new_s_m' => 'nou',
     'news_s_f' => 'nouă',
@@ -10,5 +10,5 @@ return [
     'no' => 'nu',
     'synchronization' => 'sincronizare',
     'configuration' => 'configurare',
-    'dpd_objects' => 'DPD Objects'
+    'dpd_objects' => 'Obiecte API'
 ];

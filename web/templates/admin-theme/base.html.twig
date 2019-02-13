@@ -9,7 +9,7 @@
   <meta name="description" content="">
   <meta name="author" content="Nalyk">
 
-  <title>LapinCMS - {{ translator('site.dashboard') }}</title>
+  <title>LapinCMS - {{ translator('site.dashboard')|capitalize }}</title>
 
   <!-- Custom fonts for this template-->
   <link href="/admin-assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -92,7 +92,7 @@
       <li class="nav-item active">
         <a class="nav-link" href="{{ path_for('admin_dashboard') }}">
           <i class="fas fa-fw fa-tachometer-alt"></i>
-          <span>{{ translator('site.dashboard') }}</span>
+          <span>{{ translator('site.dashboard')|capitalize }}</span>
         </a>
       </li>
       <li class="nav-item dropdown">
@@ -102,10 +102,10 @@
         </a>
         <div class="dropdown-menu" aria-labelledby="dpdDropdown">
           <h6 class="dropdown-header">Management:</h6>
-          <a class="dropdown-item" href="{{ path_for('deployd_new') }}">{{ translator('site.new_s_m') }}</a>
-          <a class="dropdown-item" href="{{ path_for('deployd_list') }}">{{ translator('site.list') }}</a>
+          <a class="dropdown-item" href="{{ path_for('deployd_new') }}">{{ translator('site.new_s_m')|capitalize }}</a>
+          <a class="dropdown-item" href="{{ path_for('deployd_list') }}">{{ translator('site.list')|capitalize }}</a>
           <div class="dropdown-divider"></div>
-          <h6 class="dropdown-header">{{ translator('site.synchronization') }}:</h6>
+          <h6 class="dropdown-header">{{ translator('site.synchronization')|capitalize }}:</h6>
           <a class="dropdown-item" href="#">404 Page</a>
           <a class="dropdown-item" href="#">Blank Page</a>
         </div>
@@ -113,7 +113,7 @@
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="configDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
           <i class="fas fa-fw fa-cog"></i>
-          <span>{{ translator('site.configuration') }}</span>
+          <span>{{ translator('site.configuration')|capitalize }}</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="configDropdown">
           <h6 class="dropdown-header">Text:</h6>
