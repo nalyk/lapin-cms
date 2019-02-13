@@ -38,6 +38,7 @@ class Router
             // deployd objects
             $this->group('/deployd', function() {
                 $this->get('/new', DeploydController::class . ':new')->setName('deployd_new');
+                $this->get('/list', DeploydController::class . ':list')->setName('deployd_list');
                 $this->post('/create', DeploydController::class . ':create')->setName('deployd_create');
                 $this->post('/update', DeploydController::class . ':update')->setName('deployd_update');
                 $this->get('/edit/{id}', DeploydController::class . ':edit')->setName('deployd_edit');

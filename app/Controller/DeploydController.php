@@ -36,6 +36,21 @@ class DeploydController
     }
 
     /**
+     * This method is called when the user enters the `/deployd/list` route
+     * @param  \Psr\Http\Message\ServerRequestInterface $request   PSR7 request
+     * @param  \Psr\Http\Message\ResponseInterface      $response  PSR7 response
+     * @param  array                                    $args      Route parameters
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function list($request, $response, $args)
+    {
+        //$news = $this->container->deployd->get("news", null, '{"category":"sport"}');
+        $news["msg"] = $request->getAttribute('msg');
+        $data = ['news' => $news];
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
+    }
+
+    /**
      * This method is called when the user enters the `/deployd/create` route
      * @param  \Psr\Http\Message\ServerRequestInterface $request   PSR7 request
      * @param  \Psr\Http\Message\ResponseInterface      $response  PSR7 response
