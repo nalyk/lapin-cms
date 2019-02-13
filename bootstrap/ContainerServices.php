@@ -94,6 +94,18 @@ class ContainerServices
 
             return $cache;
         });
+
+        $this->registerService('rcache', function () {
+            $redisClient = \Symfony\Component\Cache\Adapter\RedisAdapter::createConnection(
+                'redis://localhost'
+            );
+            $namespace       = '';
+            $defaultLifetime = 0;
+
+            $rcache = new \Symfony\Component\Cache\Simple\RedisCache($redisClient, $namespace, $defaultLifetime);
+
+            return $rcache;
+        });
     }
 
     /**
