@@ -356,7 +356,7 @@ class ContainerServices
             * Twig Extensions
             * https://github.com/twigphp/Twig-extensions
             */
-            $twig->addExtension(new Twig_Extensions_Extension_Text());
+            $twig->addExtension(new \Twig_Extensions_Extension_Text());
 
             /**
             * Custom tests
