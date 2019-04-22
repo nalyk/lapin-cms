@@ -64,7 +64,6 @@ class Settings
         $this->configureDatabase();
         $this->configureMailer();
         $this->configureDeployd();
-        $this->configureTwig();
     }
 
     /**
@@ -207,25 +206,6 @@ class Settings
 
         $config['dpd']['host']      = getenv('DPD_HOST');
         $config['dpd']['protocol']  = getenv('DPD_PROTOCOL');
-
-        $this->setConfig($config);
-    }
-
-    /**
-     * Configure Twig
-     * @return void
-     */
-    public function configureTwig()
-    {
-        $config = [];
-
-        $config['twig']['path']                 = getenv('TWIG_PATH');
-        $config['twig']['chmod']                = getenv('TWIG_CHMOD');
-        $config['twig']['base']                 = getenv('TWIG_BASE');
-        $config['twig']['cache_path']           = getenv('TWIG_CACHE_PATH');
-        $config['twig']['cache_name']           = getenv('TWIG_CACHE_NAME');
-        $config['twig']['cache_lifetime']       = getenv('TWIG_CACHE_LIFETIME');
-        $config['twig']['minify']               = getenv('TWIG_MINIFY');
 
         $this->setConfig($config);
     }

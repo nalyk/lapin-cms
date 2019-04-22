@@ -361,13 +361,6 @@ class ContainerServices
             $twig->addExtension(new \Twig_Extensions_Extension_Date());
 
             /**
-            * Twig Extensions
-            * https://github.com/twigphp/Twig-extensions
-            */
-           
-            $twig->addExtension(new \Odan\Twig\TwigAssetsExtension($twig->getEnvironment(), $this->container->settings['twig']));
-
-            /**
             * Custom tests
             */
 
