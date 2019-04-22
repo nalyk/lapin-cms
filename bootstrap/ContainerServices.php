@@ -436,6 +436,8 @@ class ContainerServices
             $twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/admin-theme','admin');
             $twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/site-theme','site');
 
+            $twig->getEnvironment()->getLoader()->addPath('/mnt/disk_st_1/var/www/uptown.md/htdocs/public','public');
+
             return $twig;
         });
     }
