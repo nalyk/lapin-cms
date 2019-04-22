@@ -365,7 +365,7 @@ class ContainerServices
             * https://github.com/twigphp/Twig-extensions
             */
            
-            $twig->addExtension(new \Odan\Twig\TwigAssetsExtension($twig->getEnvironment(), $this->container['settings']['TWIG_PATH']));
+            $twig->addExtension(new \Odan\Twig\TwigAssetsExtension($twig->getEnvironment(), $this->container->settings['twig']['path']));
 
             /**
             * Custom tests
