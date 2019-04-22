@@ -25,7 +25,8 @@
         "jaybizzle/crawler-detect": "^1.2",
         "bnf/slim3-psr15": "^1.1",
         "mikehaertl/php-shellcommand": "^1.4",
-        "twig/extensions": "^1.5"
+        "twig/extensions": "^1.5",
+        "odan/twig-assets": "^2.1"
     },
     "autoload": {
         "psr-4": {
