@@ -353,6 +353,12 @@ class ContainerServices
             $twig->addExtension(new \Cocur\Slugify\Bridge\Twig\SlugifyExtension(\Cocur\Slugify\Slugify::create()));
 
             /**
+            * Twig Extensions
+            * https://github.com/twigphp/Twig-extensions
+            */
+            $twig->addExtension(new Twig_Extensions_Extension_Text());
+
+            /**
             * Custom tests
             */
 
