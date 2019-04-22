@@ -438,6 +438,8 @@ class ContainerServices
 
             $twig->getEnvironment()->getLoader()->addPath('/mnt/disk_st_1/var/www/uptown.md/htdocs/public','public');
 
+            $twig->addExtension(new \Odan\Twig\TwigAssetsExtension($twig->getEnvironment(), $this->container->settings['twig']));
+
             return $twig;
         });
     }
