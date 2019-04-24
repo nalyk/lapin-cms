@@ -47,6 +47,8 @@ This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backen
 - https://github.com/jaybizzle/crawler-detect
 - https://github.com/bnf/slim3-psr15
 - https://github.com/mikehaertl/php-shellcommand
+- https://github.com/twig/extensions
+- https://github.com/facebook/graph-sdk
 
 
 ## Libs to watch / install later
