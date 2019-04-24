@@ -3,7 +3,11 @@
 <head>
     <meta charset="utf-8">
     <title>Hello world!</title>
-    {#<base href="/"/>#}
+    <base href="//{{domain}}/assets/"/>
+    {{ assets({files: [
+        '@public/assets/css/style.css',
+        ], name: 'layout.css'})
+    }}
 </head>
 <body>
     <p>

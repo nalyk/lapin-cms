@@ -26,7 +26,8 @@
         "bnf/slim3-psr15": "^1.1",
         "mikehaertl/php-shellcommand": "^1.4",
         "twig/extensions": "^1.5",
-        "facebook/graph-sdk": "^5.7"
+        "facebook/graph-sdk": "^5.7",
+        "odan/twig-assets": "^2.1"
     },
     "autoload": {
         "psr-4": {

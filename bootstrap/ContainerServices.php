@@ -349,8 +349,11 @@ class ContainerServices
     {
         $this->registerService('twig', function () {
 
-            $twig = new \Slim\Views\Twig($this->container->settings['twig']['templates']['path'], [
-                'cache' => ($this->container->settings['environment'] == 'production') ? $this->container->settings['twig']['cache']['path'] : false,
+            $twig_settings      = $this->container->settings['twig'];
+            $assets_settings    = $this->container->settings['assets'];
+
+            $twig = new \Slim\Views\Twig($twig_settings['templates']['path'], [
+                'cache' => ($this->container->settings['environment'] == 'production') ? $twig_settings['cache']['path'] : false,
                 'debug' => ($this->container->settings['environment'] == 'production') ? false : true
             ]);
 
@@ -452,8 +455,11 @@ class ContainerServices
             * return $this->container->twig->render($response, "@admin/index.html.twig", $data);
             *
             */
-            $twig->getEnvironment()->getLoader()->addPath($this->container->settings['twig']['templates']['path'].'/admin-theme','admin');
-            $twig->getEnvironment()->getLoader()->addPath($this->container->settings['twig']['templates']['path'].'/site-theme','site');
+            $twig->getEnvironment()->getLoader()->addPath($twig_settings['templates']['path'].'/admin-theme','admin');
+            $twig->getEnvironment()->getLoader()->addPath($twig_settings['templates']['path'].'/site-theme','site');
+            $twig->getEnvironment()->getLoader()->addPath($twig_settings['public'],'public');
+
+            $twig->addExtension(new \Odan\Twig\TwigAssetsExtension($twig->getEnvironment(), $assets_settings));
 
             return $twig;
         });
