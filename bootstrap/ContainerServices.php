@@ -61,6 +61,7 @@ class ContainerServices
         $this->registerCarbon();
         $this->registerMonolog();
         $this->registerSession();
+        $this->registerFacebook();
 
         /**
          * Register Twig and View-related services
@@ -275,6 +276,28 @@ class ContainerServices
         });
     }
 
+
+    /**
+     * Register 'facebook' on the container
+     * @return void
+     */
+    public function registerFacebook()
+    {
+        $this->registerService('facebook', function () {
+
+            $fb_settings = $this->container['settings']['facebook'];
+
+            $fb = new \Facebook\Facebook([
+              'app_id' => $fb_settings['app']['id'],
+              'app_secret' => $fb_settings['app']['secret'],
+              'default_graph_version' => 'v2.10',
+              'default_access_token' => $fb_settings['token'],
+            ]);
+
+            return $facebook;
+        });
+    }
+
     /**
      * Register 'faker' on the container
      * @return void
@@ -325,13 +348,9 @@ class ContainerServices
     public function registerTwig()
     {
         $this->registerService('twig', function () {
-            $paths = [
-                'templates' => __DIR__ . "/../web/templates",
-                'cache'     => __DIR__ . "/../storage/cache"
-            ];
 
-            $twig = new \Slim\Views\Twig($paths['templates'], [
-                'cache' => ($this->container->settings['environment'] == 'production') ? $paths['cache'] : false,
+            $twig = new \Slim\Views\Twig($this->container->settings['twig']['templates']['path'], [
+                'cache' => ($this->container->settings['environment'] == 'production') ? $this->container->settings['twig']['cache']['path'] : false,
                 'debug' => ($this->container->settings['environment'] == 'production') ? false : true
             ]);
 
@@ -433,12 +452,8 @@ class ContainerServices
             * return $this->container->twig->render($response, "@admin/index.html.twig", $data);
             *
             */
-            $twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/admin-theme','admin');
-            $twig->getEnvironment()->getLoader()->addPath($paths['templates'].'/site-theme','site');
-
-            $twig->getEnvironment()->getLoader()->addPath('/mnt/disk_st_1/var/www/uptown.md/htdocs/public','public');
-
-            $twig->addExtension(new \Odan\Twig\TwigAssetsExtension($twig->getEnvironment(), $this->container->settings['twig']));
+            $twig->getEnvironment()->getLoader()->addPath($this->container->settings['twig']['templates']['path'].'/admin-theme','admin');
+            $twig->getEnvironment()->getLoader()->addPath($this->container->settings['twig']['templates']['path'].'/site-theme','site');
 
             return $twig;
         });

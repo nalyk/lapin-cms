@@ -65,6 +65,7 @@ class Settings
         $this->configureMailer();
         $this->configureDeployd();
         $this->configureTwig();
+        $this->configureFacebook();
     }
 
     /**
@@ -219,13 +220,23 @@ class Settings
     {
         $config = [];
 
-        $config['twig']['path']                 = getenv('TWIG_PATH');
-        $config['twig']['chmod']                = getenv('TWIG_CHMOD');
-        $config['twig']['base']                 = getenv('TWIG_BASE');
-        $config['twig']['cache_path']           = getenv('TWIG_CACHE_PATH');
-        $config['twig']['cache_name']           = getenv('TWIG_CACHE_NAME');
-        $config['twig']['cache_lifetime']       = getenv('TWIG_CACHE_LIFETIME');
-        $config['twig']['minify']               = getenv('TWIG_MINIFY');
+        $config['twig']['templates']['path']    = getenv('TWIG_TEMPLATES_PATH');
+        $config['twig']['cache']['path']        = getenv('TWIG_CACHE_PATH');
+
+        $this->setConfig($config);
+    }
+
+    /**
+     * Configure Facebook
+     * @return void
+     */
+    public function configureFacebook()
+    {
+        $config = [];
+
+        $config['facebook']['app']['id']        = getenv('FACEBOOK_APP_ID');
+        $config['facebook']['app']['secret']    = getenv('FACEBOOK_APP_SECRET');
+        $config['facebook']['token']            = getenv('FACEBOOK_TOKEN');
 
         $this->setConfig($config);
     }
