@@ -49,7 +49,7 @@ This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backen
 - https://github.com/mikehaertl/php-shellcommand
 - https://github.com/twig/extensions
 - https://github.com/facebook/graph-sdk
-
+- https://github.com/odan/twig-assets
 
 ## Libs to watch / install later
 - https://github.com/jwage/purl
