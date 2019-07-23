@@ -459,8 +459,6 @@ class ContainerServices
             $twig->getEnvironment()->getLoader()->addPath($twig_settings['templates']['path'].'/site-theme','site');
             $twig->getEnvironment()->getLoader()->addPath($twig_settings['public'],'public');
 
-            $twig->addExtension(new \Odan\Twig\TwigAssetsExtension($twig->getEnvironment(), $assets_settings));
-
             return $twig;
         });
     }

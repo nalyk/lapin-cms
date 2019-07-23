@@ -224,14 +224,6 @@ class Settings
         $config['twig']['cache']['path']        = getenv('TWIG_CACHE_PATH');
         $config['twig']['public']               = getenv('TWIG_PUBLIC');
 
-        $config['assets']['path']               = getenv('ASSETS_PATH');
-        $config['assets']['chmod']              = getenv('ASSETS_CHMOD');
-        $config['assets']['base']               = getenv('ASSETS_BASE');
-        $config['assets']['cache']              = getenv('ASSETS_CACHE');
-        $config['assets']['name']               = getenv('ASSETS_NAME');
-        $config['assets']['lifetime']           = getenv('ASSETS_LIFETIME');
-        $config['assets']['minify']             = getenv('ASSETS_MINIFY');
-
         $this->setConfig($config);
     }
 
