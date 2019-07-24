@@ -128,7 +128,7 @@ class Settings
             $plugin_name = basename($dir);
             $config = [];
             $pluginDotenv = new Dotenv($dir);
-            $pluginDotenv->load();
+            $pluginDotenv->overload();
             $config['plugin'][$plugin_name]['name'] = getenv('PLUGIN_NAME');
             $config['plugin'][$plugin_name]['version'] = getenv('PLUGIN_VERSION');
             $config['plugin'][$plugin_name]['author'] = getenv('PLUGIN_AUTHOR');
