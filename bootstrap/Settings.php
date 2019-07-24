@@ -126,7 +126,7 @@ class Settings
         echo '<ul>';
         foreach($subdirs as $dir)
         {
-            echo '<li><a href="?d='.$dir.'">'.$dir.'</a></li>';
+            echo '<li><a href="?d='.$dir.'">'.basename($dir).'</a></li>';
         }
         echo '</ul>';
         die();
