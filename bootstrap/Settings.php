@@ -120,7 +120,7 @@ class Settings
      */
     public function configurePlugins()
     {
-        $plugindir = __DIR__ . '/../plugins';
+        $plugindir = __DIR__ . '/../plugins/';
         $subdirs = glob($plugindir, GLOB_ONLYDIR);
  
         echo '<ul>';
