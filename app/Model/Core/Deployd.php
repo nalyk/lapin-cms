@@ -36,10 +36,13 @@ class Deployd
             $res = $this->guzzle->request("POST", $this->apiserver."/".$collection, [
                 "form_params" => $data
             ]);
-            $response = json_decode($res->getBody(), true);
+            $response["_status"] = true;
+            $response["data"] = json_decode($res->getBody(), true);
         } catch (ClientException $e) {
-            echo Psr7\str($e->getRequest());
-            echo Psr7\str($e->getResponse());
+            // echo Psr7\str($e->getRequest());
+            // echo Psr7\str($e->getResponse());
+            $response["_status"] = false;
+            $response["_error"] = Psr7\str($e->getResponse());
         }
         
         return $response;
@@ -58,10 +61,13 @@ class Deployd
             $res = $this->guzzle->request("PUT", $this->apiserver."/".$collection."/".$id, [
                 "form_params" => $data
             ]);
-            $response = json_decode($res->getBody(), true);
+            $response["_status"] = true;
+            $response["data"] = json_decode($res->getBody(), true);
         } catch (ClientException $e) {
-            echo Psr7\str($e->getRequest());
-            echo Psr7\str($e->getResponse());
+            // echo Psr7\str($e->getRequest());
+            // echo Psr7\str($e->getResponse());
+            $response["_status"] = false;
+            $response["_error"] = Psr7\str($e->getResponse());
         }
         
         return $response;
@@ -80,26 +86,35 @@ class Deployd
     	if ($id == null && $query == null) {
     		try {
     			$res = $this->guzzle->request("GET", $this->apiserver."/".$collection);
-	            $response = json_decode($res->getBody(), true);
+	            $response["_status"] = true;
+                $response["data"] = json_decode($res->getBody(), true);
 			} catch (ClientException $e) {
-			    echo Psr7\str($e->getRequest());
-			    echo Psr7\str($e->getResponse());
+			    // echo Psr7\str($e->getRequest());
+                // echo Psr7\str($e->getResponse());
+                $response["_status"] = false;
+                $response["_error"] = Psr7\str($e->getResponse());
 			}
     	} elseif ($query == null) {
             try {
                 $res = $this->guzzle->request("GET", $this->apiserver."/".$collection."/".$id);
-                $response = json_decode($res->getBody(), true);
+                $response["_status"] = true;
+                $response["data"] = json_decode($res->getBody(), true);
             } catch (ClientException $e) {
-                echo Psr7\str($e->getRequest());
-                echo Psr7\str($e->getResponse());
+                // echo Psr7\str($e->getRequest());
+                // echo Psr7\str($e->getResponse());
+                $response["_status"] = false;
+                $response["_error"] = Psr7\str($e->getResponse());
             }
         } else {
             try {
                 $res = $this->guzzle->request("GET", $this->apiserver."/".$collection."/?".$query);
-                $response = json_decode($res->getBody(), true);
+                $response["_status"] = true;
+                $response["data"] = json_decode($res->getBody(), true);
             } catch (ClientException $e) {
-                echo Psr7\str($e->getRequest());
-                echo Psr7\str($e->getResponse());
+                // echo Psr7\str($e->getRequest());
+                // echo Psr7\str($e->getResponse());
+                $response["_status"] = false;
+                $response["_error"] = Psr7\str($e->getResponse());
             }
         }
 
@@ -116,10 +131,13 @@ class Deployd
     {
         try {
             $res = $this->guzzle->request("DELETE", $this->apiserver."/".$collection."/".$id);
-            $response = json_decode($res->getBody(), true);
+            $response["_status"] = true;
+            $response["data"] = json_decode($res->getBody(), true);
         } catch (ClientException $e) {
-            echo Psr7\str($e->getRequest());
-            echo Psr7\str($e->getResponse());
+            // echo Psr7\str($e->getRequest());
+            // echo Psr7\str($e->getResponse());
+            $response["_status"] = false;
+            $response["_error"] = Psr7\str($e->getResponse());
         }
 
         return $response;

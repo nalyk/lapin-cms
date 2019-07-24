@@ -209,7 +209,13 @@ class ContainerServices
     public function registerGuzzle()
     {
         $this->registerService('guzzle', function () {
-            $guzzle = new \GuzzleHttp\Client();
+            $guzzle = new \GuzzleHttp\Client([
+                        'verify' => false,
+                        'headers' => ['Connection' => 'close'],
+                        CURLOPT_FORBID_REUSE => true,
+                        CURLOPT_FRESH_CONNECT => true,
+                    ]
+            );
 
             return $guzzle;
         });
