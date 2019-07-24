@@ -123,12 +123,23 @@ class Settings
         $plugindir = __DIR__ . '/../plugins/*';
         $subdirs = glob($plugindir, GLOB_ONLYDIR);
  
-        echo '<ul>';
         foreach($subdirs as $dir)
         {
-            echo '<li><a href="?d='.$dir.'">'.basename($dir).'</a></li>';
+            $plugin_name = basename($dir);
+            $config = [];
+            $pluginDotenv = new Dotenv($dir);
+            $pluginDotenv->load();
+            $config['plugin'][$plugin_name]['name'] = getenv('PLUGIN_NAME');
+            $config['plugin'][$plugin_name]['version'] = getenv('PLUGIN_VERSION');
+            $config['plugin'][$plugin_name]['author'] = getenv('PLUGIN_AUTHOR');
+            $config['plugin'][$plugin_name]['email'] = getenv('PLUGIN_EMAIL');
+            $config['plugin'][$plugin_name]['url'] = getenv('PLUGIN_URL');
+            
+            $this->setConfig($config);
         }
-        echo '</ul>';
+        echo '<pre>';
+        print_r($config);
+        echo '</pre>';
         die();
         /*
         $config = [];
