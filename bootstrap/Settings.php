@@ -120,8 +120,16 @@ class Settings
      */
     public function configurePlugins()
     {
-        echo __DIR__;
-        die('plugin test');
+        $plugindir = __DIR__ . '/../plugins'
+        $subdirs = glob($plugindir, GLOB_ONLYDIR);
+ 
+        echo '<ul>';
+        foreach($subdirs as $dir)
+        {
+            echo '<li><a href="?d='.$dir.'">'.$dir.'</a></li>';
+        }
+        echo '</ul>';
+        die();
         /*
         $config = [];
         $pluginDotenv = new Dotenv(__DIR__ . '/../');
