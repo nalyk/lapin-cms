@@ -58,6 +58,7 @@ class Settings
     {
         $this->configureEnvironment();
         $this->configureSlim();
+        $this->configurePlugins();
         $this->configureDomain();
         $this->configureLocale();
         $this->configureTimezone();
@@ -111,6 +112,23 @@ class Settings
         $config['addContentLengthHeader'] = true;
 
         $this->setConfig($config);
+    }
+
+    /**
+     * Configure Slim (slim internal settings)
+     * @return void
+     */
+    public function configurePlugins()
+    {
+        echo __DIR__;
+        die('plugin test');
+        /*
+        $config = [];
+        $pluginDotenv = new Dotenv(__DIR__ . '/../');
+        $pluginDotenv->load();
+
+        $this->dotenv = $dotenv;
+        */
     }
 
     /**
