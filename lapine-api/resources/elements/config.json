@@ -1,0 +1,117 @@
+{
+	"type": "Collection",
+	"properties": {
+		"createdBy": {
+			"name": "createdBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "createdBy",
+			"order": 0
+		},
+		"createdDate": {
+			"name": "createdDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createdDate",
+			"order": 1
+		},
+		"lastModifiedBy": {
+			"name": "lastModifiedBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lastModifiedBy",
+			"order": 2
+		},
+		"lastModifiedDate": {
+			"name": "lastModifiedDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lastModifiedDate",
+			"order": 3
+		},
+		"lang": {
+			"name": "lang",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lang",
+			"order": 4
+		},
+		"translatedFrom": {
+			"name": "translatedFrom",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "translatedFrom",
+			"order": 5
+		},
+		"type": {
+			"name": "type",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "type",
+			"order": 6
+		},
+		"title": {
+			"name": "title",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "title",
+			"order": 7
+		},
+		"body": {
+			"name": "body",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "body",
+			"order": 8
+		},
+		"video": {
+			"name": "video",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "video",
+			"order": 9
+		},
+		"image": {
+			"name": "image",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "image",
+			"order": 10
+		},
+		"source": {
+			"name": "source",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "source",
+			"order": 11
+		},
+		"publishedDate": {
+			"name": "publishedDate",
+			"type": "date",
+			"typeLabel": "date",
+			"required": false,
+			"id": "publishedDate",
+			"order": 12
+		},
+		"modifiedDate": {
+			"name": "modifiedDate",
+			"type": "date",
+			"typeLabel": "date",
+			"required": false,
+			"id": "modifiedDate",
+			"order": 13
+		}
+	}
+}

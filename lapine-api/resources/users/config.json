@@ -1,0 +1,45 @@
+{
+	"type": "UserCollection",
+	"properties": {
+		"createdBy": {
+			"name": "createdBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "createdBy",
+			"order": 0
+		},
+		"createdDate": {
+			"name": "createdDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createdDate",
+			"order": 1
+		},
+		"lastModifiedBy": {
+			"name": "lastModifiedBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lastModifiedBy",
+			"order": 2
+		},
+		"lastModifiedDate": {
+			"name": "lastModifiedDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lastModifiedDate",
+			"order": 3
+		},
+		"lang": {
+			"name": "lang",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lang",
+			"order": 4
+		}
+	}
+}

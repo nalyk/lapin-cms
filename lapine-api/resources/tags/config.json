@@ -1,0 +1,77 @@
+{
+	"type": "Collection",
+	"properties": {
+		"createdBy": {
+			"name": "createdBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "createdBy",
+			"order": 0
+		},
+		"createdDate": {
+			"name": "createdDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createdDate",
+			"order": 1
+		},
+		"lastModifiedBy": {
+			"name": "lastModifiedBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lastModifiedBy",
+			"order": 2
+		},
+		"lastModifiedDate": {
+			"name": "lastModifiedDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lastModifiedDate",
+			"order": 3
+		},
+		"lang": {
+			"name": "lang",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lang",
+			"order": 4
+		},
+		"translatedFrom": {
+			"name": "translatedFrom",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "translatedFrom",
+			"order": 5
+		},
+		"type": {
+			"name": "type",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "type",
+			"order": 6
+		},
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "name",
+			"order": 7
+		},
+		"url": {
+			"name": "url",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "url",
+			"order": 8
+		}
+	}
+}

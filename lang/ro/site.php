@@ -12,6 +12,10 @@ return [
     'configuration' => 'configurare',
     'dpd_objects' => 'Obiecte API',
     'menu' => [
-        'admin' => 'Administrare'
+        'admin' => 'Administrare',
+        'types' => 'Administrare tipuri',
+        'tags' => 'Etichete',
+        'elements' => 'Elemente',
+        'news' => 'Știri'
     ]
 ];

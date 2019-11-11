@@ -34,4 +34,33 @@ class AdminController
         return $this->container->twig->render($response, "@admin/index.html.twig", $data);
     }
 
+    /**
+     * This method is called when the user enters the `/admin/dashboard` route
+     * @param  \Psr\Http\Message\ServerRequestInterface $request   PSR7 request
+     * @param  \Psr\Http\Message\ResponseInterface      $response  PSR7 response
+     * @param  array                                    $args      Route parameters
+     * @return \Psr\Http\Message\ResponseInterface
+     */
+    public function typesEdit($request, $response, $args)
+    {
+        $type = $args["name"];
+        switch ($type) {
+            case 'elements':
+                $collection = "element-types";
+                break;
+            case 'news':
+                $collection = "news-types";
+                break;
+            case 'tags':
+                $collection = "tag-types";
+                break;
+        }
+        $items = $this->container->deployd->get($collection, null, null);
+        $data = [
+            "type" => $type,
+            "items" => $items
+        ];
+        return $this->container->twig->render($response, "@admin/index.html.twig", $data);
+    }
+
 }

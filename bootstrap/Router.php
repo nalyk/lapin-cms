@@ -35,6 +35,7 @@ class Router
 
         $this->app->group('/admin', function() {
             $this->get('/dashboard', AdminController::class . ':dashboard')->setName('admin_dashboard');
+            $this->any('/types[/{name}]', AdminController::class . ':typesEdit')->setName('admin_types_edit');
             // deployd objects
             $this->group('/deployd', function() {
                 $this->get('/new', DeploydController::class . ':new')->setName('deployd_new');
