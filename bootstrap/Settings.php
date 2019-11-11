@@ -220,8 +220,8 @@ class Settings
     {
         $config = [];
 
-        $config['twig']['templates']['path']    = getenv('TWIG_TEMPLATES_PATH');
-        $config['twig']['cache']['path']        = getenv('TWIG_CACHE_PATH');
+        $config['twig']['templates']['path']    = __DIR__ ."/../".getenv('TWIG_TEMPLATES_PATH');
+        $config['twig']['cache']['path']        = __DIR__ ."/../".getenv('TWIG_CACHE_PATH');
         $config['twig']['public']               = getenv('TWIG_PUBLIC');
 
         $this->setConfig($config);

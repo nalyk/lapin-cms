@@ -356,7 +356,6 @@ class ContainerServices
         $this->registerService('twig', function () {
 
             $twig_settings      = $this->container->settings['twig'];
-            $assets_settings    = $this->container->settings['assets'];
 
             $twig = new \Slim\Views\Twig($twig_settings['templates']['path'], [
                 'cache' => ($this->container->settings['environment'] == 'production') ? $twig_settings['cache']['path'] : false,
@@ -463,7 +462,7 @@ class ContainerServices
             */
             $twig->getEnvironment()->getLoader()->addPath($twig_settings['templates']['path'].'/admin-theme','admin');
             $twig->getEnvironment()->getLoader()->addPath($twig_settings['templates']['path'].'/site-theme','site');
-            $twig->getEnvironment()->getLoader()->addPath($twig_settings['public'],'public');
+            //$twig->getEnvironment()->getLoader()->addPath($twig_settings['public'],'public');
 
             return $twig;
         });

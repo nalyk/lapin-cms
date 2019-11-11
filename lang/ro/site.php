@@ -10,5 +10,8 @@ return [
     'no' => 'nu',
     'synchronization' => 'sincronizare',
     'configuration' => 'configurare',
-    'dpd_objects' => 'Obiecte API'
+    'dpd_objects' => 'Obiecte API',
+    'menu' => [
+        'admin' => 'Administrare'
+    ]
 ];
