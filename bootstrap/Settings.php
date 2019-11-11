@@ -58,7 +58,6 @@ class Settings
     {
         $this->configureEnvironment();
         $this->configureSlim();
-        $this->configurePlugins();
         $this->configureDomain();
         $this->configureLocale();
         $this->configureTimezone();
@@ -112,42 +111,6 @@ class Settings
         $config['addContentLengthHeader'] = true;
 
         $this->setConfig($config);
-    }
-
-    /**
-     * Configure Slim (slim internal settings)
-     * @return void
-     */
-    public function configurePlugins()
-    {
-        $plugindir = __DIR__ . '/../plugins/*';
-        $subdirs = glob($plugindir, GLOB_ONLYDIR);
- 
-        foreach($subdirs as $dir)
-        {
-            $plugin_name = basename($dir);
-            $config = [];
-            $pluginDotenv = new Dotenv($dir);
-            $pluginDotenv->overload();
-            $config['plugin'][$plugin_name]['name'] = getenv('PLUGIN_NAME');
-            $config['plugin'][$plugin_name]['version'] = getenv('PLUGIN_VERSION');
-            $config['plugin'][$plugin_name]['author'] = getenv('PLUGIN_AUTHOR');
-            $config['plugin'][$plugin_name]['email'] = getenv('PLUGIN_EMAIL');
-            $config['plugin'][$plugin_name]['url'] = getenv('PLUGIN_URL');
-            
-            $this->setConfig($config);
-        }
-        echo '<pre>';
-        print_r($config);
-        echo '</pre>';
-        die();
-        /*
-        $config = [];
-        $pluginDotenv = new Dotenv(__DIR__ . '/../');
-        $pluginDotenv->load();
-
-        $this->dotenv = $dotenv;
-        */
     }
 
     /**
