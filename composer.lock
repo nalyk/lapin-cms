@@ -1,10 +1,9 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "hash": "9938568ee4e90582b9a35dc5d160af9b",
     "content-hash": "cb16e84aff51f2bb72cc88e63598db0a",
     "packages": [
         {
@@ -58,7 +57,7 @@
                 "middleware",
                 "psr7"
             ],
-            "time": "2018-07-03 06:53:57"
+            "time": "2018-07-03T06:53:57+00:00"
         },
         {
             "name": "bnf/slim3-psr15",
@@ -102,7 +101,7 @@
                 "psr",
                 "slim"
             ],
-            "time": "2019-08-20 07:33:27"
+            "time": "2019-08-20T07:33:27+00:00"
         },
         {
             "name": "bryanjhv/slim-session",
@@ -150,7 +149,7 @@
                 "session",
                 "slim"
             ],
-            "time": "2019-08-24 07:27:48"
+            "time": "2019-08-24T07:27:48+00:00"
         },
         {
             "name": "cocur/slugify",
@@ -215,7 +214,7 @@
                 "slug",
                 "slugify"
             ],
-            "time": "2019-01-31 20:38:55"
+            "time": "2019-01-31T20:38:55+00:00"
         },
         {
             "name": "container-interop/container-interop",
@@ -246,7 +245,8 @@
             ],
             "description": "Promoting the interoperability of container objects (DIC, SL, etc.)",
             "homepage": "https://github.com/container-interop/container-interop",
-            "time": "2017-02-14 19:40:03"
+            "abandoned": "psr/container",
+            "time": "2017-02-14T19:40:03+00:00"
         },
         {
             "name": "davidepastore/slim-validation",
@@ -296,7 +296,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2018-08-14 20:30:55"
+            "time": "2018-08-14T20:30:55+00:00"
         },
         {
             "name": "doctrine/inflector",
@@ -363,7 +363,7 @@
                 "singularize",
                 "string"
             ],
-            "time": "2019-10-30 19:59:35"
+            "time": "2019-10-30T19:59:35+00:00"
         },
         {
             "name": "facebook/graph-sdk",
@@ -421,7 +421,7 @@
                 "facebook",
                 "sdk"
             ],
-            "time": "2018-12-11 22:56:31"
+            "time": "2018-12-11T22:56:31+00:00"
         },
         {
             "name": "fzaninotto/faker",
@@ -471,7 +471,7 @@
                 "faker",
                 "fixtures"
             ],
-            "time": "2018-07-12 10:23:15"
+            "time": "2018-07-12T10:23:15+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -537,7 +537,7 @@
                 "rest",
                 "web service"
             ],
-            "time": "2019-10-23 15:58:00"
+            "time": "2019-10-23T15:58:00+00:00"
         },
         {
             "name": "guzzlehttp/promises",
@@ -588,7 +588,7 @@
             "keywords": [
                 "promise"
             ],
-            "time": "2016-12-20 10:07:11"
+            "time": "2016-12-20T10:07:11+00:00"
         },
         {
             "name": "guzzlehttp/psr7",
@@ -659,7 +659,7 @@
                 "uri",
                 "url"
             ],
-            "time": "2019-07-01 23:21:34"
+            "time": "2019-07-01T23:21:34+00:00"
         },
         {
             "name": "illuminate/container",
@@ -704,7 +704,7 @@
             ],
             "description": "The Illuminate Container package.",
             "homepage": "https://laravel.com",
-            "time": "2019-08-20 02:00:23"
+            "time": "2019-08-20T02:00:23+00:00"
         },
         {
             "name": "illuminate/contracts",
@@ -748,7 +748,7 @@
             ],
             "description": "The Illuminate Contracts package.",
             "homepage": "https://laravel.com",
-            "time": "2019-07-30 13:57:21"
+            "time": "2019-07-30T13:57:21+00:00"
         },
         {
             "name": "illuminate/database",
@@ -808,7 +808,7 @@
                 "orm",
                 "sql"
             ],
-            "time": "2019-08-31 17:01:57"
+            "time": "2019-08-31T17:01:57+00:00"
         },
         {
             "name": "illuminate/filesystem",
@@ -860,7 +860,7 @@
             ],
             "description": "The Illuminate Filesystem package.",
             "homepage": "https://laravel.com",
-            "time": "2019-08-14 13:38:15"
+            "time": "2019-08-14T13:38:15+00:00"
         },
         {
             "name": "illuminate/support",
@@ -921,7 +921,7 @@
             ],
             "description": "The Illuminate Support package.",
             "homepage": "https://laravel.com",
-            "time": "2019-09-03 16:36:47"
+            "time": "2019-09-03T16:36:47+00:00"
         },
         {
             "name": "illuminate/translation",
@@ -967,7 +967,7 @@
             ],
             "description": "The Illuminate Translation package.",
             "homepage": "https://laravel.com",
-            "time": "2019-06-04 14:33:55"
+            "time": "2019-06-04T14:33:55+00:00"
         },
         {
             "name": "jaybizzle/crawler-detect",
@@ -1016,7 +1016,7 @@
                 "crawlerdetect",
                 "php crawler detect"
             ],
-            "time": "2019-11-07 21:06:22"
+            "time": "2019-11-07T21:06:22+00:00"
         },
         {
             "name": "jenssegers/date",
@@ -1081,7 +1081,7 @@
                 "time",
                 "translation"
             ],
-            "time": "2019-03-10 08:50:58"
+            "time": "2019-03-10T08:50:58+00:00"
         },
         {
             "name": "mobiledetect/mobiledetectlib",
@@ -1133,7 +1133,7 @@
                 "mobile detector",
                 "php mobile detect"
             ],
-            "time": "2019-09-18 18:44:20"
+            "time": "2019-09-18T18:44:20+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -1211,7 +1211,7 @@
                 "logging",
                 "psr-3"
             ],
-            "time": "2019-09-06 13:49:17"
+            "time": "2019-09-06T13:49:17+00:00"
         },
         {
             "name": "nahid/jsonq",
@@ -1258,7 +1258,7 @@
                 "jsonq",
                 "query"
             ],
-            "time": "2019-10-17 18:53:33"
+            "time": "2019-10-17T18:53:33+00:00"
         },
         {
             "name": "nesbot/carbon",
@@ -1325,7 +1325,7 @@
                 "datetime",
                 "time"
             ],
-            "time": "2019-10-21 21:32:25"
+            "time": "2019-10-21T21:32:25+00:00"
         },
         {
             "name": "nikic/fast-route",
@@ -1371,7 +1371,7 @@
                 "router",
                 "routing"
             ],
-            "time": "2018-02-13 20:26:39"
+            "time": "2018-02-13T20:26:39+00:00"
         },
         {
             "name": "paragonie/random_compat",
@@ -1416,7 +1416,7 @@
                 "pseudorandom",
                 "random"
             ],
-            "time": "2018-07-02 15:55:56"
+            "time": "2018-07-02T15:55:56+00:00"
         },
         {
             "name": "phlak/twine",
@@ -1461,7 +1461,7 @@
                 }
             ],
             "description": "String manipulation, leveled up!",
-            "time": "2019-08-14 06:21:26"
+            "time": "2019-08-14T06:21:26+00:00"
         },
         {
             "name": "phpmailer/phpmailer",
@@ -1527,7 +1527,7 @@
                 }
             ],
             "description": "PHPMailer is a full-featured email creation and transfer class for PHP",
-            "time": "2019-09-27 21:33:43"
+            "time": "2019-09-27T21:33:43+00:00"
         },
         {
             "name": "pimple/pimple",
@@ -1577,7 +1577,7 @@
                 "container",
                 "dependency injection"
             ],
-            "time": "2018-01-21 07:42:36"
+            "time": "2018-01-21T07:42:36+00:00"
         },
         {
             "name": "psr/cache",
@@ -1623,7 +1623,7 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2016-08-06 20:24:11"
+            "time": "2016-08-06T20:24:11+00:00"
         },
         {
             "name": "psr/container",
@@ -1672,7 +1672,7 @@
                 "container-interop",
                 "psr"
             ],
-            "time": "2017-02-14 16:28:37"
+            "time": "2017-02-14T16:28:37+00:00"
         },
         {
             "name": "psr/http-message",
@@ -1722,7 +1722,7 @@
                 "request",
                 "response"
             ],
-            "time": "2016-08-06 14:39:51"
+            "time": "2016-08-06T14:39:51+00:00"
         },
         {
             "name": "psr/http-server-handler",
@@ -1775,7 +1775,7 @@
                 "response",
                 "server"
             ],
-            "time": "2018-10-30 16:46:14"
+            "time": "2018-10-30T16:46:14+00:00"
         },
         {
             "name": "psr/http-server-middleware",
@@ -1828,7 +1828,7 @@
                 "request",
                 "response"
             ],
-            "time": "2018-10-30 17:12:04"
+            "time": "2018-10-30T17:12:04+00:00"
         },
         {
             "name": "psr/log",
@@ -1875,7 +1875,7 @@
                 "psr",
                 "psr-3"
             ],
-            "time": "2019-11-01 11:05:21"
+            "time": "2019-11-01T11:05:21+00:00"
         },
         {
             "name": "psr/simple-cache",
@@ -1923,7 +1923,7 @@
                 "psr-16",
                 "simple-cache"
             ],
-            "time": "2017-10-23 01:57:42"
+            "time": "2017-10-23T01:57:42+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
@@ -1963,7 +1963,7 @@
                 }
             ],
             "description": "A polyfill for getallheaders.",
-            "time": "2019-03-08 08:55:37"
+            "time": "2019-03-08T08:55:37+00:00"
         },
         {
             "name": "ramsey/uuid",
@@ -2045,7 +2045,7 @@
                 "identifier",
                 "uuid"
             ],
-            "time": "2018-07-19 23:38:55"
+            "time": "2018-07-19T23:38:55+00:00"
         },
         {
             "name": "respect/validation",
@@ -2108,7 +2108,7 @@
                 "validation",
                 "validator"
             ],
-            "time": "2019-05-28 06:10:06"
+            "time": "2019-05-28T06:10:06+00:00"
         },
         {
             "name": "robmorgan/phinx",
@@ -2179,7 +2179,7 @@
                 "migrations",
                 "phinx"
             ],
-            "time": "2017-12-23 06:48:51"
+            "time": "2017-12-23T06:48:51+00:00"
         },
         {
             "name": "slim/csrf",
@@ -2229,7 +2229,7 @@
                 "middleware",
                 "slim"
             ],
-            "time": "2018-08-22 16:12:18"
+            "time": "2018-08-22T16:12:18+00:00"
         },
         {
             "name": "slim/slim",
@@ -2303,7 +2303,7 @@
                 "micro",
                 "router"
             ],
-            "time": "2019-08-20 18:46:05"
+            "time": "2019-08-20T18:46:05+00:00"
         },
         {
             "name": "slim/twig-view",
@@ -2354,20 +2354,20 @@
                 "twig",
                 "view"
             ],
-            "time": "2019-04-06 16:34:38"
+            "time": "2019-04-06T16:34:38+00:00"
         },
         {
             "name": "symfony/cache",
-            "version": "v3.4.33",
+            "version": "v3.4.35",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/cache.git",
-                "reference": "9307cc18f444d0b4f6b56daceaa7e55174dfdfb5"
+                "reference": "8d5db9c0cecf8b6f79fa96583fae652224d897da"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/cache/zipball/9307cc18f444d0b4f6b56daceaa7e55174dfdfb5",
-                "reference": "9307cc18f444d0b4f6b56daceaa7e55174dfdfb5",
+                "url": "https://api.github.com/repos/symfony/cache/zipball/8d5db9c0cecf8b6f79fa96583fae652224d897da",
+                "reference": "8d5db9c0cecf8b6f79fa96583fae652224d897da",
                 "shasum": ""
             },
             "require": {
@@ -2424,7 +2424,7 @@
                 "caching",
                 "psr6"
             ],
-            "time": "2019-10-24 15:33:53"
+            "time": "2019-11-12T12:50:33+00:00"
         },
         {
             "name": "symfony/config",
@@ -2488,7 +2488,7 @@
             ],
             "description": "Symfony Config Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-30 13:18:51"
+            "time": "2019-10-30T13:18:51+00:00"
         },
         {
             "name": "symfony/console",
@@ -2563,7 +2563,7 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-30 12:58:49"
+            "time": "2019-10-30T12:58:49+00:00"
         },
         {
             "name": "symfony/filesystem",
@@ -2613,7 +2613,7 @@
             ],
             "description": "Symfony Filesystem Component",
             "homepage": "https://symfony.com",
-            "time": "2019-08-20 14:07:54"
+            "time": "2019-08-20T14:07:54+00:00"
         },
         {
             "name": "symfony/finder",
@@ -2662,20 +2662,20 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-30 12:53:54"
+            "time": "2019-10-30T12:53:54+00:00"
         },
         {
             "name": "symfony/polyfill-apcu",
-            "version": "v1.12.0",
+            "version": "v1.13.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/polyfill-apcu.git",
-                "reference": "71ce80635d5dcd67772b4dda00b86068595f64d5"
+                "reference": "a8e961c841b9ec52927a87914f8820a1ad8f8116"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/71ce80635d5dcd67772b4dda00b86068595f64d5",
-                "reference": "71ce80635d5dcd67772b4dda00b86068595f64d5",
+                "url": "https://api.github.com/repos/symfony/polyfill-apcu/zipball/a8e961c841b9ec52927a87914f8820a1ad8f8116",
+                "reference": "a8e961c841b9ec52927a87914f8820a1ad8f8116",
                 "shasum": ""
             },
             "require": {
@@ -2684,7 +2684,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.12-dev"
+                    "dev-master": "1.13-dev"
                 }
             },
             "autoload": {
@@ -2718,7 +2718,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06 08:03:45"
+            "time": "2019-11-27T13:56:44+00:00"
         },
         {
             "name": "symfony/polyfill-ctype",
@@ -2776,7 +2776,7 @@
                 "polyfill",
                 "portable"
             ],
-            "time": "2019-08-06 08:03:45"
+            "time": "2019-08-06T08:03:45+00:00"
         },
         {
             "name": "symfony/polyfill-mbstring",
@@ -2835,7 +2835,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06 08:03:45"
+            "time": "2019-08-06T08:03:45+00:00"
         },
         {
             "name": "symfony/polyfill-php73",
@@ -2893,7 +2893,7 @@
                 "portable",
                 "shim"
             ],
-            "time": "2019-08-06 08:03:45"
+            "time": "2019-08-06T08:03:45+00:00"
         },
         {
             "name": "symfony/service-contracts",
@@ -2951,7 +2951,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-10-14 12:27:06"
+            "time": "2019-10-14T12:27:06+00:00"
         },
         {
             "name": "symfony/translation",
@@ -3027,7 +3027,7 @@
             ],
             "description": "Symfony Translation Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-30 12:53:54"
+            "time": "2019-10-30T12:53:54+00:00"
         },
         {
             "name": "symfony/translation-contracts",
@@ -3084,7 +3084,7 @@
                 "interoperability",
                 "standards"
             ],
-            "time": "2019-09-17 11:12:18"
+            "time": "2019-09-17T11:12:18+00:00"
         },
         {
             "name": "symfony/yaml",
@@ -3143,7 +3143,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2019-10-30 12:58:49"
+            "time": "2019-10-30T12:58:49+00:00"
         },
         {
             "name": "twig/extensions",
@@ -3198,7 +3198,7 @@
                 "i18n",
                 "text"
             ],
-            "time": "2018-12-05 18:34:18"
+            "time": "2018-12-05T18:34:18+00:00"
         },
         {
             "name": "twig/twig",
@@ -3265,7 +3265,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2019-10-17 07:34:53"
+            "time": "2019-10-17T07:34:53+00:00"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3316,7 +3316,7 @@
                 "env",
                 "environment"
             ],
-            "time": "2019-01-29 11:11:52"
+            "time": "2019-01-29T11:11:52+00:00"
         },
         {
             "name": "zguillez/slim-mobile-detect",
@@ -3356,7 +3356,7 @@
                 "Mobile_Detect",
                 "slim"
             ],
-            "time": "2016-03-08 17:57:38"
+            "time": "2016-03-08T17:57:38+00:00"
         },
         {
             "name": "zumba/json-serializer",
@@ -3410,7 +3410,7 @@
                 "serialize",
                 "serializer"
             ],
-            "time": "2018-02-07 18:14:13"
+            "time": "2018-02-07T18:14:13+00:00"
         }
     ],
     "packages-dev": [],
