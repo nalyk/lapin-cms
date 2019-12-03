@@ -1,0 +1,236 @@
+{% extends 'admin-theme/base.html.twig' %}
+
+{% block pre_head_inject %}
+
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-rowgroup/css/rowGroup.bootstrap4.min.css">
+
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/admin-assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+{% endblock %}
+
+{% block head_inject %}
+<style type="text/css">
+#categories-grid .category-name {
+	font-size: 100%;
+	font-weight: 400;
+}
+</style>
+{% endblock %}
+
+{% block content_header %}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Administrare articole</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ path_for('admin_dashboard', { 'lang': language.lang }) }}">Home</a></li>
+              <li class="breadcrumb-item active">Articole</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body table-responsive">
+                <h5 class="card-title" id="grid-card-title"></h5>
+                <table id="articles-grid" class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Title</th>
+                      <th>Visible</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Title</th>
+                      <th>Visible</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+                <br />
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col-md-12 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+{% endblock %}
+
+{% block pre_footer_inject %}
+    
+{% endblock %}
+
+{% block footer_inject %}
+  <!-- DataTables -->
+  <script src="/admin-assets/plugins/datatables/jquery.dataTables.js"></script>
+  <script src="/admin-assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+  <script src="/admin-assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-rowgroup/js/dataTables.rowGroup.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-rowgroup/js/rowGroup.bootstrap4.min.js"></script>
+  <!-- Bootstrap Switch -->
+  <script src="/admin-assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+{% endblock %}
+
+{% block post_footer_inject %}
+  <script>
+    $(document).ready(function() {
+    	
+      var table = $("#articles-grid").DataTable( {
+          "processing": true,
+          "pageLength": 50,
+          "dom": "Bfrtip",
+          "buttons": [
+            {
+              "text": '<i class="fas fa-plus"></i>',
+              "action": function ( e, dt, node, config ) {
+                  //alert( "Button activated" );
+                  addNewArticle();
+              },
+              "className": "addCategory"
+            }
+          ],
+          "ajax": {
+            "url": "{{ path_for('admin_ajax_articles', { 'lang': language.lang }) }}",
+            "dataSrc": "items"
+          },
+          "columnDefs": [{
+            targets: [ 1 ],
+            visible: false
+          }],
+          "columns": [
+              { 
+              	"data": "headline"
+              },
+              {
+                "data": "visible",
+                "render": function ( data, type, row ) {
+                  if (data == "true") {
+                    return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success" checked>';
+                  } else {
+                    return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                  }
+                }
+              },
+              {
+                "data": null,
+                "className": "center",
+                "defaultContent": '<button type="button" class="category_edit btn btn-success btn-xs"><i class="fas fa-pencil-alt"></i> Edit</button> <button type="button" class="category_remove btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Delete</button>'
+              }
+          ],
+          "order": [[ 0, "asc" ]],
+          "orderFixed": [0, 'asc'],
+      } );
+
+      table.buttons().container().appendTo( '#grid-card-title:eq(0)' );
+      table.on( 'draw.dt', function () {
+        $("input[data-bootstrap-switch]").each(function(){
+          $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+      });
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      });
+
+      $('#articles-grid').on('click', 'button.category_remove', function (e) {
+        e.preventDefault();
+        var rowData = table.row( $(this).parents('tr') ).data();
+        $.ajax({
+            url : "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+            type : "DELETE",
+            data: rowData
+        }).done(function(result) {
+            var items = result.items;
+            $(this).parent().parent().remove();
+            table.ajax.reload();
+        });
+      } );
+
+      $('#articles-grid').on('click', 'button.category_edit', function (e) {
+        e.preventDefault();
+        var rowData = table.row( $(this).parents('tr') ).data();
+        showEditDialog(rowData);
+      } );
+
+      $('#articles-grid').on('switchChange.bootstrapSwitch', 'input[name="tableVisibleCategory"]', function(event, state) {
+        var rowData = table.row( $(this).parents('tr') ).data();
+        var newVisible = state;
+        rowData.visible = newVisible;
+        delete rowData.createdDate;
+        delete rowData.lastModifiedDate;
+        delete rowData.createdBy;
+        delete rowData.lastModifiedBy;
+        $.ajax({
+            url: "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+            type: "PUT",
+            data: rowData
+        }).done(function(result) {
+            var items = result.items;
+            table.ajax.reload();
+        });
+      });
+		
+
+		var showEditDialog = function(item) {
+      		var m = BootstrapModalWrapperFactory.createAjaxModal({
+	            message: '<div class="text-center">Loading</div>',
+	            closable: true,
+	            title: "Editare categorie",
+	            closeByBackdrop: false,
+	            sendId: true, // default is true which send the modal id as a url parameter.
+	            idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
+	            updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+	            size: "modal-sm",
+	            ajax: {
+	                url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'category' }) }}"
+	            },
+	            localData: {
+	            	action: "edit",
+	                table: table,
+	                item: item,
+	                funRef: function () {
+	                    alert("running from the modal itself");
+	                },
+	                updateGrid: function() {
+	                	updateGrid();
+	                }
+	            }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
+	            ajaxContainerReadyEventName: "modal-ajax-updated"
+	        });
+		};
+
+		var addNewArticle = function() {
+			window.location = "{{ path_for('admin_articles_create', { 'lang': language.lang }) }}";
+		};
+		
+
+    });
+  </script>
+{% endblock %}

@@ -30,8 +30,22 @@ class IndexController
     public function index($request, $response, $args)
     {
         $this->logger->warning(substr(strrchr(rtrim(__CLASS__, '\\'), '\\'), 1).': '.__FUNCTION__);
-        $news["msg"] = $request->getAttribute('msg');        
-        $data = ['news' => $news];
+        /* common variables */
+        $language = $request->getAttribute('language');
+         
+        $cms = [];
+        //$cms["types"] = \App\Controller\AdminController::getTypes();
+        //$cms["categories"] = \App\Controller\AdminController::getCategories();
+
+        $data = [];
+        $data["auth"] = @$request->getAttribute('auth');
+        $data["cms"] = $cms;
+        $data["language"] = $language;
+        $user = @$this->container->deployd->get('users', $request->getAttribute('auth')["_user"]->id, null);
+        $data["user"] = $user["data"];
+        /* /END common variables */
+
+
         return $this->container->twig->render($response, "@site/index.html.twig", $data);
     }
 }

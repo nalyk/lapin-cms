@@ -1,0 +1,248 @@
+{% extends 'admin-theme/base.html.twig' %}
+
+{% block pre_head_inject %}
+  <!-- jsGrid -->
+  <link rel="stylesheet" href="/admin-assets/plugins/jsgrid/jsgrid.min.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/jsgrid/jsgrid-theme.min.css">
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div id="jsTypesGrid"></div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col-md-12 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+{% endblock %}
+
+{% block pre_footer_inject %}
+    <div class="modal fade" id="type-edit">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="formEditTypeName">Nume</label>
+                <input type="text" class="form-control" id="formEditTypeName" placeholder="nume">
+              </div>
+              <div class="form-group">
+                <label for="formEditTypeDescription">Descriere</label>
+                <textarea class="form-control" id="formEditTypeDescription"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveType" data-collection="" data-item="">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" id="type-add">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">Adăugare tip nou</h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="formAddTypeName">Nume</label>
+                <input type="text" class="form-control" id="formAddTypeName" placeholder="nume">
+              </div>
+              <div class="form-group">
+                <label for="formAddTypeDescription">Descriere</label>
+                <textarea class="form-control" id="formAddTypeDescription"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="addType" data-collection="">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+{% endblock %}
+
+{% block footer_inject %}
+  <!-- jsGrid -->
+  <script src="/admin-assets/plugins/jsgrid/jsgrid.min.js"></script>
+{% endblock %}
+
+{% block post_footer_inject %}
+  <script>
+    $(function () {
+
+      var showEditDialog = function(item) {
+        $('#type-edit').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          //var recipient = button.data('whatever') // Extract info from data-* attributes
+          // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+          // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+          var modal = $(this)
+          modal.find('.modal-title').text('Editare tip: {{type}}');
+          modal.find('#formEditTypeName').val(item.name);
+          modal.find('#formEditTypeDescription').val(item.description);
+          modal.find('#saveType').data( "collection", "{{type}}" );
+          modal.find('#saveType').data( "item", item.id );
+        });
+        $('#type-edit').modal('show');
+      };
+
+      $('#saveType').on('click', function() {
+        $("#jsTypesGrid").jsGrid("updateItem", { collection: "{{type}}", id: $('#saveType').data("item"), name: $('#formEditTypeName').val(), description: $('#formEditTypeDescription').val() });
+        $('#type-edit').modal('hide');
+        $("#jsTypesGrid").jsGrid("loadData");
+      });
+
+      var showAddDialog = function() {
+        $('#type-add').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget) // Button that triggered the modal
+          var modal = $(this)
+          modal.find('#addType').data( "collection", "{{type}}" );
+          modal.find('#formAddTypeName').val('');
+          modal.find('#formAddTypeDescription').val('');
+        });
+        $('#type-add').modal('show');
+      };
+
+      $('#addType').on('click', function() {
+        var insertData = {
+          collection: "{{type}}",
+          name: $('#formAddTypeName').val(),
+          description: $('#formAddTypeDescription').val()
+        }
+        $("#jsTypesGrid").jsGrid("insertItem", insertData);
+        $('#type-add').modal('hide');
+        $("#jsTypesGrid").jsGrid("loadData");
+      });
+
+      $("#jsTypesGrid").jsGrid({
+          height: "auto",
+          width: "100%",
+
+          sorting: true,
+          paging: true,
+          autoload: true,
+
+          controller: {
+            loadData: function(filter) {
+                var def = $.Deferred();
+                $.ajax({
+                    url : 'http://lapin-dev.studiotechno.md/admin/ajax/types/{{type}}',
+                    type : "GET",
+                    contentType : "application/json; charset=utf-8",
+                    dataType : "json"
+                }).done(function(item) {
+                    //console.log(item);
+                    def.resolve(item.items);
+                });
+                return def.promise();
+            },
+            updateItem: function(item) {
+                var def = $.Deferred();
+                $.ajax({
+                    url: "http://lapin-dev.studiotechno.md/admin/ajax/types/{{type}}",
+                    type: "PUT",
+                    data: item
+                }).done(function(item) {
+                    console.log(item);
+                    def.resolve(item.item);
+                });
+                return def.promise();
+            },
+            insertItem: function(item) {
+                var def = $.Deferred();
+                $.ajax({
+                    url: "http://lapin-dev.studiotechno.md/admin/ajax/types/{{type}}",
+                    type: "POST",
+                    data: item
+                }).done(function(item) {
+                    console.log(item);
+                    def.resolve(item.item);
+                });
+                return def.promise();
+            },
+            deleteItem: function(item) {
+                var def = $.Deferred();
+                item.collection = "{{type}}";
+                $.ajax({
+                    url: "http://lapin-dev.studiotechno.md/admin/ajax/types/{{type}}",
+                    type: "DELETE",
+                    data: item
+                }).done(function(item) {
+                    console.log(item);
+                    def.resolve(item.item);
+                });
+                return def.promise();
+            },
+          },
+
+          // data: gridData,
+          fields: [
+            { name: "id", visible: false, width: 0},
+            { name: "name", type: "text", title: "Denumire", width: 150 },
+            { name: "description", type: "text", title: "Descriere", width: 250 },
+            {
+              type: "control",
+              itemTemplate: function(value, item) {
+                  var editDeleteBtn = $('<input class="jsgrid-button jsgrid-edit-button" type="button" title="Edit"><input class="jsgrid-button jsgrid-delete-button" type="button" title="Delete">')
+                      .on('click', function (e) {
+                          //console.clear();
+                          if (e.target.title == 'Edit') {
+                              //Based on button click you can make your customization 
+                              showEditDialog(item); 
+                              //console.log(item); //You can access all data based on item clicked
+                              e.stopPropagation();
+                          } else {
+                              //Based on button click you can make your customization
+                              $("#jsTypesGrid").jsGrid("deleteItem", item);
+                              console.log('Delete')
+                          }
+                      });
+
+                  return editDeleteBtn; //
+              },
+              headerTemplate: function() {
+                  return $("<button>").attr("type", "button").addClass('btn btn-block bg-gradient-success btn-flat').text("Add")
+                          .on("click", function () {
+                              showAddDialog();
+                          });
+              }
+            }
+          ]
+      });
+
+    });
+  </script>
+{% endblock %}

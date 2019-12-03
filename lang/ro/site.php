@@ -13,9 +13,9 @@ return [
     'dpd_objects' => 'Obiecte API',
     'menu' => [
         'admin' => 'Administrare',
-        'types' => 'Administrare tipuri',
+        'types' => 'Tipuri',
         'tags' => 'Etichete',
         'elements' => 'Elemente',
-        'news' => 'Știri'
+        'articles' => 'Articole'
     ]
 ];

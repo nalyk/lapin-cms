@@ -1,0 +1,262 @@
+{% extends 'admin-theme/base.html.twig' %}
+
+{% block pre_head_inject %}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+{% endblock %}
+
+{% block content_header %}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Administrare tipuri: {{collection}}</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ path_for('admin_dashboard', { 'lang': language.lang }) }}">Home</a></li>
+              <li class="breadcrumb-item"><a href="{{ path_for('admin_types', { 'lang': language.lang }) }}">Types</a></li>
+              <li class="breadcrumb-item active">{{ collection|capitalize }}</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body table-responsive">
+                <h5 class="card-title" id="grid-card-title"></h5>
+                <table id="types-grid" class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>ID</th>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col-md-12 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+{% endblock %}
+
+{% block pre_footer_inject %}
+    <div class="modal fade" id="type-edit">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="formEditTypeName">Nume</label>
+                <input type="text" class="form-control" id="formEditTypeName" placeholder="nume">
+              </div>
+              <div class="form-group">
+                <label for="formEditTypeDescription">Descriere</label>
+                <textarea class="form-control" id="formEditTypeDescription"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveType" data-collection="" data-item="">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" id="type-add">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="formAddTypeName">Nume</label>
+                <input type="text" class="form-control" id="formAddTypeName" placeholder="nume">
+              </div>
+              <div class="form-group">
+                <label for="formAddTypeDescription">Descriere</label>
+                <textarea class="form-control" id="formAddTypeDescription"></textarea>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="addType" data-collection="">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+{% endblock %}
+
+{% block footer_inject %}
+  <!-- DataTables -->
+  <script src="/admin-assets/plugins/datatables/jquery.dataTables.js"></script>
+  <script src="/admin-assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+  <script src="/admin-assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+{% endblock %}
+
+{% block post_footer_inject %}
+  <script>
+    $(document).ready(function() {
+
+      	var table = $("#types-grid").DataTable( {
+          	"processing": true,
+          	"dom": "Bfrtip",
+          	"buttons": [
+            	{
+              		"text": '<i class="fas fa-plus"></i>',
+              		"action": function ( e, dt, node, config ) {
+                  		//alert( "Button activated" );
+                  		showAddDialog(e);
+              		},
+              		"className": "addType"
+            	}
+          	],
+          	"ajax": {
+            	"url": "{{ path_for('admin_ajax_types', { 'lang': language.lang, 'collection': collection }) }}",
+            	"dataSrc": "items"
+          	},
+          	"columnDefs": [
+            	{
+                	"targets": [ 0 ],
+                	"visible": false,
+                	"searchable": false
+            	}
+          	],
+          	"columns": [
+              	{ "data": "id" },
+              	{ "data": "name" },
+              	{ "data": "description" },
+              	{
+                	"data": null,
+                	"className": "center",
+                	"defaultContent": '<button type="button" class="type_edit btn btn-success btn-xs"><i class="fas fa-pencil-alt"></i> Edit</button> <button type="button" class="type_remove btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Delete</button>'
+              	}
+          	],
+      	} );
+
+      	table.buttons().container().appendTo( '#grid-card-title:eq(0)' );
+
+      	$('#types-grid').on('click', 'button.type_remove', function (e) {
+        	e.preventDefault();
+        	var rowData = table.row( $(this).parents('tr') ).data();
+        	$.ajax({
+            	url : "{{ path_for('admin_ajax_types', { 'lang': language.lang, 'collection': collection }) }}",
+            	type : "DELETE",
+            	data: rowData
+        	}).done(function(result) {
+            	var items = result.items;
+            	$(this).parent().parent().remove();
+            	table.ajax.reload();
+        	});
+      	} );
+
+      	$('#types-grid').on('click', 'button.type_edit', function (e) {
+        	e.preventDefault();
+        	var rowData = table.row( $(this).parents('tr') ).data();
+        	showEditDialog(rowData);
+      	} );
+
+		var showAddDialog = function(event) {
+      		var m = BootstrapModalWrapperFactory.createAjaxModal({
+	            message: '<div class="text-center">Loading</div>',
+	            closable: true,
+	            title: "Adaugare tip: {{collection}}",
+	            closeByBackdrop: false,
+	            sendId: true, // default is true which send the modal id as a url parameter.
+	            idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
+	            updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+	            size: "modal-sm",
+	            ajax: {
+	                url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'type' }) }}"
+	            },
+	            localData: {
+	            	action: "add",
+	            	collection: "{{collection}}",
+	                table: table,
+	                funRef: function () {
+	                    alert("running from the modal itself");
+	                }
+	            }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
+	            ajaxContainerReadyEventName: "modal-ajax-updated"
+	        });
+		};
+
+      	var showEditDialog = function(item) {
+      		var m = BootstrapModalWrapperFactory.createAjaxModal({
+	            message: '<div class="text-center">Loading</div>',
+	            closable: true,
+	            title: "Editare tip: {{collection}}",
+	            closeByBackdrop: false,
+	            sendId: true, // default is true which send the modal id as a url parameter.
+	            idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
+	            updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+	            size: "modal-sm",
+	            ajax: {
+	                url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'type' }) }}"
+	            },
+	            localData: {
+	            	action: "edit",
+	                collection: "{{collection}}",
+	                table: table,
+	                item: item,
+	                funRef: function () {
+	                    alert("running from the modal itself");
+	                }
+	            }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
+	            ajaxContainerReadyEventName: "modal-ajax-updated"
+	        });
+		};
+
+    });
+  </script>
+{% endblock %}

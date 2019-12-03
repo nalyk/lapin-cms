@@ -1,0 +1,166 @@
+<div class="dynamic-ajax-content">
+    <div class="row">
+        <div class="col-lg-12">
+            <form>
+              <div class="form-group">
+                <label for="modalform-name">Nume</label>
+                <input type="text" class="form-control" id="modalform-name" name="name" placeholder="nume">
+              </div>
+              <div class="form-group">
+                <label for="modalform-description">Descriere</label>
+                <textarea class="form-control" id="modalform-description" name="description"></textarea>
+              </div>
+              <hr />
+              <div class="form-group">
+                  <label for="modalform-parrent">Parrent</label>
+                  <select class="form-control select2bs4" id="modalform-parrent" style="width: 100%;">
+                    <option selected="selected" value=null></option>
+                    {% for parrentCategory in parrentCategories %}
+                    	<option value="{{parrentCategory.id}}">{{parrentCategory.name}}</option>
+                    {% endfor %}
+                  </select>
+                </div>
+                <hr />
+              <p>Activă pentru:<p>
+              <div class="form-group clearfix">
+                {% for cmsCategory in cms.categories %}
+                <div class="icheck-primary">
+                  <input name="modalform-collection" type="checkbox" data-collection="{{cmsCategory}}" id="modalform-collection-{{cmsCategory}}">
+                    <label for="modalform-collection-{{cmsCategory}}">
+                      {{cmsCategory}}
+                    </label>
+                </div>
+                {% endfor %}
+              </div>
+              <p>Visible:</p>
+              <div class="form-group clearfix">
+                <input type="checkbox" id="modalform-visible" name="visible" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+              </div>
+            </form>
+        </div>
+    </div>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
+            
+            $("#" + currentParentModal.options.id).on(currentParentModal.options.ajaxContainerReadyEventName, function (event, modal) {
+            	var action = modal.options.localData.action;
+
+                modal.addButton({
+                    label: "Close",
+                    cssClass: "btn btn-default",
+                    action: function (button, buttonData, originalEvent) {
+                        return this.hide();
+                    }
+                });
+
+                if (action == "add") {
+                	$("#modalform-visible").bootstrapSwitch('state', $(this).prop('checked'));
+                	modal.addButton({
+	                    label: "Save",
+	                    cssClass: "btn btn-primary",
+	                    action: function (button, buttonData, originalEvent) {
+	                    	var insertData = {};
+					        insertData.name = $('#modalform-name').val();
+					        insertData.description = $('#modalform-description').val();
+					        var collections = [];
+					        $.each($("input[name='modalform-collection']:checked"), function(){
+					          collections.push($(this).data( "collection" ));
+					        });
+					        insertData.collections = collections;
+					        if($('#modalform-visible').prop("checked") == true){
+								insertData.visible = true;
+							} else {
+								insertData.visible = false;
+							}
+							if($('#modalform-parrent').val()){
+								insertData.parrent = $('#modalform-parrent').val();
+							} else {
+								insertData.parrent = "null";
+							}
+
+							$.ajax({
+            					url : "http://lapin-dev.studiotechno.md/ro/admin/ajax/categories",
+            					type : "POST",
+            					data: insertData
+        					}).done(function(result) {
+            					var items = result.items;
+            					modal.hide();
+            					modal.options.localData.table.ajax.reload();
+        					});
+	                    }
+	                });
+                }
+
+                if (action == "edit") {
+                	var item = modal.options.localData.item;
+                	console.log(item);
+                	
+                	$.each($("input[name='modalform-collection']"), function(){
+            			$(this).prop('checked', false);
+          			});
+
+                	$('#modalform-name').val(item.name);
+                	$('#modalform-description').val(item.description);
+
+                	$.each(item.collections, function( index, value ) {
+            			$("#modalform-collection-"+value).prop('checked', true);
+          			});
+
+          			if(item.visible == 'true'){
+			            $("#modalform-visible").prop('checked', true);
+			            $("#modalform-visible").bootstrapSwitch('state', true);
+			        } else {
+			            $("#modalform-visible").prop('checked', false);
+			            $("#modalform-visible").bootstrapSwitch('state', false);
+			        }
+
+			        if (typeof item.parrent !== 'undefined' || item.parrent !== null) {
+    					$('#modalform-parrent').val(item.parrent.id);
+    					//$('#modalform-parrent').text(item.parrent.name);
+					}
+
+			        modal.addButton({
+	                    label: "Save",
+	                    cssClass: "btn btn-primary",
+	                    action: function (button, buttonData, originalEvent) {
+	                    	var updateData = {
+					          id: item.id,
+					          name: $('#modalform-name').val(),
+					          description: $('#modalform-description').val()
+					        }
+					        var collections = [];
+					        $.each($("input[name='modalform-collection']:checked"), function(){
+					          collections.push($(this).data( "collection" ));
+					        });
+					        updateData.collections = collections;
+					        if($('#modalform-visible').prop("checked") == true){
+					          updateData.visible = true;
+					        } else {
+					          updateData.visible = false;
+					        }
+
+					        if($('#modalform-parrent').val()){
+								updateData.parrent = $('#modalform-parrent').val();
+							} else {
+								updateData.parrent = "null";
+							}
+
+					        $.ajax({
+					            url: "http://lapin-dev.studiotechno.md/ro/admin/ajax/categories",
+					            type: "PUT",
+					            data: updateData
+					        }).done(function(result) {
+					            var items = result.items;
+					            modal.hide();
+					            //modal.options.localData.updateGrid();
+            					modal.options.localData.table.ajax.reload();
+					        });
+	                    }
+	                });
+                }
+                
+            });
+        });
+    </script>
+</div>

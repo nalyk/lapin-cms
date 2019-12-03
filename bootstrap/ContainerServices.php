@@ -62,6 +62,7 @@ class ContainerServices
         $this->registerMonolog();
         $this->registerSession();
         $this->registerFacebook();
+        $this->registerCategory();
 
         /**
          * Register Twig and View-related services
@@ -301,6 +302,19 @@ class ContainerServices
             ]);
 
             return $facebook;
+        });
+    }
+
+    /**
+     * Register 'category' on the container
+     * @return void
+     */
+    public function registerCategory()
+    {
+        $this->registerService('category', function () {
+            $category = new \App\Controller\CategoryController($this->container);
+
+            return $category;
         });
     }
 

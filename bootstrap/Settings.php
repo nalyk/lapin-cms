@@ -66,6 +66,7 @@ class Settings
         $this->configureDeployd();
         $this->configureTwig();
         $this->configureFacebook();
+        $this->configureCMS();
     }
 
     /**
@@ -238,6 +239,28 @@ class Settings
         $config['facebook']['app']['id']        = getenv('FACEBOOK_APP_ID');
         $config['facebook']['app']['secret']    = getenv('FACEBOOK_APP_SECRET');
         $config['facebook']['token']            = getenv('FACEBOOK_TOKEN');
+
+        $this->setConfig($config);
+    }
+
+    /**
+     * Configure Lapin CMS
+     * @return void
+     */
+    public function configureCMS()
+    {
+        $config = [];
+
+        $cms_types_ignore                           = getenv('CMS_TYPES_IGNORE');
+        $cms_categories_ignore                      = getenv('CMS_CATEGORIES_IGNORE');
+        $cms_tags_ignore                            = getenv('CMS_TAGS_IGNORE');
+        $cms_languages_active                       = getenv('CMS_ACTIVE_LANGUAGES');
+        $config['cms']['types']['ignore']           = explode(",", $cms_types_ignore);
+        $config['cms']['categories']['ignore']      = explode(",", $cms_categories_ignore);
+        $config['cms']['tags']['ignore']            = explode(",", $cms_tags_ignore);
+        $config['cms']['resources']                 = __DIR__ ."/../lapine-api/resources";
+        $config['cms']['languages']["avaliable"]    = explode(",", $cms_languages_active);
+        $config['cms']['languages']["default"]      = getenv('CMS_DEFAULT_LANGUAGE');
 
         $this->setConfig($config);
     }

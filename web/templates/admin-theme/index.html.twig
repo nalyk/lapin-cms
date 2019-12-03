@@ -1,9 +1,11 @@
 {% extends 'admin-theme/base.html.twig' %}
 
 {% block pre_head_inject %}
-  <!-- jsGrid -->
-  <link rel="stylesheet" href="/admin-assets/plugins/jsgrid/jsgrid.min.css">
-  <link rel="stylesheet" href="/admin-assets/plugins/jsgrid/jsgrid-theme.min.css">
+  
+{% endblock %}
+
+{% block head_inject %}
+  
 {% endblock %}
 
 {% block content %}
@@ -13,13 +15,28 @@
         <div class="row">
           <div class="col-lg-12">
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">jsGrid</h3>
-              </div>
-              <!-- /.card-header -->
               <div class="card-body">
-                {#{ dump(items) }#}
-                <div id="jsTypesGrid"></div>
+                <button id="simple-message" type="button" class="btn btn-primary">
+                  Basic Message
+                </button>
+                <div></div>
+                {{isAuth}}
+                <div>
+                  {%if cms %}
+                  <pre>
+                    {{ dump(cms) }}
+                  </pre>
+                  {% endif %}
+                  <pre>
+                    {{ dump(auth) }}
+                  </pre>
+                  <pre>
+                    {{ dump(language) }}
+                  </pre>
+                  <pre>
+                    {{ dump(user) }}
+                  </pre>
+                </div>
               </div>
               <!-- /.card-body -->
             </div>
@@ -33,32 +50,60 @@
     <!-- /.content -->
 {% endblock %}
 
+{% block pre_footer_inject %}
+
+{% endblock %}
+
 {% block footer_inject %}
-  <!-- jsGrid -->
-  <script src="/admin-assets/plugins/jsgrid/jsgrid.min.js"></script>
+
 {% endblock %}
 
 {% block post_footer_inject %}
   <script>
-    $(function () {
-      var gridData = {{ items.data|json_encode|raw }};
-      console.log(gridData);
-      $("#jsTypesGrid").jsGrid({
-          height: "auto",
-          width: "100%",
-   
-          sorting: true,
-          paging: true,
-          autoload: false,
-   
-          data: gridData,
-   
-          fields: [
-              { name: "name", type: "text", title: "Denumire", width: 150 },
-              { name: "description", type: "text", title: "Descriere", width: 250 },
-              { type: "control" }
-          ]
-      });
+    $(document).ready(function() {
+      $("#simple-message").on("click", function (event) {
+            BootstrapModalWrapperFactory.showMessage("Delfault Message to show to user");
+        });
+
+      var buttonsCount = 0;
+BootstrapModalWrapperFactory.createModal({
+    message: "Simple Message body",
+    title: "Header Title",
+    closable: false,
+    closeByBackdrop: false,
+    buttons: [
+        {
+            label: "Close",
+            cssClass: "btn btn-secondary",
+            action: function (button, buttonData, originalEvent) {
+                return this.hide();
+            }
+        },
+        {
+            label: "Add Button",
+            cssClass: "btn btn-primary",
+            action: function (button, buttonData, originalEvent) {
+                this.addButton({
+                    id: "id-" + (++buttonsCount),
+                    label: "New " + buttonsCount,
+                    cssClass: "btn btn-secondary",
+                    action: function (button, buttonData, originalEvent) {
+                        BootstrapModalWrapperFactory.showMessage("nothing only to show attached event to button id [" + buttonData.id + "]");
+                        return true;
+                    }
+                });
+            }
+        },
+        {
+            label: "Delete Button",
+            cssClass: "btn btn-primary",
+            action: function (button, buttonData, originalEvent) {
+                this.removeButton("id-" + (buttonsCount--));
+            }
+        }
+    ]
+}).show();
+
     });
   </script>
 {% endblock %}

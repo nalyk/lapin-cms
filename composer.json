@@ -25,7 +25,10 @@
         "jaybizzle/crawler-detect": "^1.2",
         "bnf/slim3-psr15": "^1.1",
         "twig/extensions": "^1.5",
-        "facebook/graph-sdk": "^5.7"
+        "facebook/graph-sdk": "^5.7",
+        "hybridauth/hybridauth": "^3.0",
+        "firebase/php-jwt": "^5.0",
+        "dflydev/fig-cookies": "^2.0"
     },
     "autoload": {
         "psr-4": {

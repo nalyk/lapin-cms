@@ -37,12 +37,14 @@ class Middlewares
      */
     public function registerMiddlewares()
     {
-        $this->registerCsrf();
+        //$this->registerCsrf();
         $this->registerSession();
+        $this->registerLanguage();
         $this->registerIpAddress();
         $this->registerAgent();
         $this->registerTrailingSlash();
         $this->registerErrorMiddleware();
+        $this->registerAuth();
     }
 
     /**
@@ -69,6 +71,13 @@ class Middlewares
         ]));
     }
 
+    public function registerLanguage()
+    {
+        $available_languages = $this->container['settings']['cms']['languages']["avaliable"];
+        $default_language = $this->container['settings']['cms']['languages']["default"];
+        $this->app->add( new \App\Middleware\LanguageMiddleware($available_languages, $default_language, $this->container) );
+    }
+
     /**
      * Register IP Address middleware
      * @return void
@@ -92,6 +101,7 @@ class Middlewares
         });
 
         // custom PSR-15 Middleware example
+        /*
         $this->app->add(new class implements Middleware {
             public function process(Request $request, RequestHandler $handler): Response
             {
@@ -99,7 +109,7 @@ class Middlewares
                 return $handler->handle($request);
             }
         });
-
+        */
     }
 
     /**
@@ -110,6 +120,11 @@ class Middlewares
     public function registerTrailingSlash()
     {
         $this->app->add(new \App\Middleware\TrailingSlashMiddleware($this->container));
+    }
+
+    public function registerAuth()
+    {
+        $this->app->add(new \App\Middleware\AuthMiddleware($this->container));
     }
 
     /**

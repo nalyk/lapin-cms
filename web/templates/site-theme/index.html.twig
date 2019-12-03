@@ -1,12 +1,65 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Hello world!</title>
-</head>
-<body>
-    <p>
-        Hello Site theme!
-    </p>
-</body>
-</html>
+{% extends 'admin-theme/base.html.twig' %}
+
+{% block pre_head_inject %}
+  
+{% endblock %}
+
+{% block head_inject %}
+  
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                <div></div>
+                {{currentUrl}}<br />
+                {{currentUri}}
+                <div>
+                  {%if cms %}
+                  <pre>
+                    {{ dump(cms) }}
+                  </pre>
+                  {% endif %}
+                  <pre>
+                    {{ dump(auth) }}
+                  </pre>
+                  <pre>
+                    {{ dump(language) }}
+                  </pre>
+                  <pre>
+                    {{ dump(user) }}
+                  </pre>
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col-md-12 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+{% endblock %}
+
+{% block pre_footer_inject %}
+
+{% endblock %}
+
+{% block footer_inject %}
+
+{% endblock %}
+
+{% block post_footer_inject %}
+  <script>
+    $(document).ready(function() {
+      
+    });
+  </script>
+{% endblock %}

@@ -1,0 +1,117 @@
+{
+	"type": "Collection",
+	"properties": {
+		"createdBy": {
+			"name": "createdBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "createdBy",
+			"order": 0
+		},
+		"createdDate": {
+			"name": "createdDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "createdDate",
+			"order": 1
+		},
+		"lastModifiedBy": {
+			"name": "lastModifiedBy",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lastModifiedBy",
+			"order": 2
+		},
+		"lastModifiedDate": {
+			"name": "lastModifiedDate",
+			"type": "number",
+			"typeLabel": "number",
+			"required": false,
+			"id": "lastModifiedDate",
+			"order": 3
+		},
+		"collections": {
+			"name": "collections",
+			"type": "array",
+			"typeLabel": "array",
+			"required": false,
+			"id": "collections",
+			"order": 4
+		},
+		"parrent": {
+			"name": "parrent",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "parrent",
+			"order": 5
+		},
+		"lang": {
+			"name": "lang",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "lang",
+			"order": 6
+		},
+		"settings": {
+			"name": "settings",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "settings",
+			"order": 7
+		},
+		"name": {
+			"name": "name",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "name",
+			"order": 8
+		},
+		"translatedFrom": {
+			"name": "translatedFrom",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "translatedFrom",
+			"order": 9
+		},
+		"title": {
+			"name": "title",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "title",
+			"order": 10
+		},
+		"description": {
+			"name": "description",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "description",
+			"order": 11
+		},
+		"url": {
+			"name": "url",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "url",
+			"order": 12
+		},
+		"visible": {
+			"name": "visible",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "visible",
+			"order": 13
+		}
+	}
+}

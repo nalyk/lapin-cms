@@ -4,6 +4,7 @@ namespace Bootstrap;
 
 use App\Controller\IndexController;
 use App\Controller\AdminController;
+use App\Controller\UserController;
 use App\Controller\DeploydController;
 
 class Router
@@ -31,19 +32,26 @@ class Router
     {
         $slimapp = $this->app;
 
-        $this->app->get('/', IndexController::class . ':index')->setName('home_index');
+        $this->app->get('/[{lang}/]', IndexController::class . ':index')->setName('home_index');
 
-        $this->app->group('/admin', function() {
+        $this->app->get('/{lang}/login', UserController::class . ':login')->setName('user_login');
+        $this->app->post('/{lang}/auth', UserController::class . ':auth')->setName('user_auth');
+
+        $this->app->group('/{lang}/admin', function() {
             $this->get('/dashboard', AdminController::class . ':dashboard')->setName('admin_dashboard');
-            $this->any('/types[/{name}]', AdminController::class . ':typesEdit')->setName('admin_types_edit');
-            // deployd objects
-            $this->group('/deployd', function() {
-                $this->get('/new', DeploydController::class . ':new')->setName('deployd_new');
-                $this->get('/list', DeploydController::class . ':list')->setName('deployd_list');
-                $this->post('/create', DeploydController::class . ':create')->setName('deployd_create');
-                $this->post('/update', DeploydController::class . ':update')->setName('deployd_update');
-                $this->get('/edit/{id}', DeploydController::class . ':edit')->setName('deployd_edit');
-                $this->post('/delete/{id}', DeploydController::class . ':delete')->setName('deployd_delete');
+            $this->get('/types[/{name}]', AdminController::class . ':types')->setName('admin_types');
+            $this->get('/categories[/{name}]', AdminController::class . ':categories')->setName('admin_categories');
+            $this->get('/articles', AdminController::class . ':articles')->setName('admin_articles');
+            $this->get('/articles/new', AdminController::class . ':articlesCreate')->setName('admin_articles_create');
+            $this->group('/ajax', function() {
+                $this->group('/types', function() {
+                    $this->any('/{collection}', AdminController::class . ':ajaxTypes')->setName('admin_ajax_types');
+                });
+                $this->any('/categories[/{name}]', AdminController::class . ':ajaxCategories')->setName('admin_ajax_categories');
+                $this->any('/articles[/{id}]', AdminController::class . ':ajaxArticles')->setName('admin_ajax_articles');
+                $this->group('/modal', function() {
+                    $this->any('/{name}', AdminController::class . ':ajaxModal')->setName('admin_ajax_modal');
+                });
             });
         });
     }

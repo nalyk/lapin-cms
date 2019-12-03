@@ -1,67 +1,83 @@
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4 nav-flat nav-child-indent nav-collapse-hide-child">
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
-      <img src="/admin-assets/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+    <a href="{{ path_for('admin_dashboard', { 'lang': language.lang }) }}" class="brand-link">
+      <img src="/admin-assets/dist/img/AdminLTELogo.png" alt="Lapin CMS Logo" class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">Lapin CMS</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
+      {% if user is not empty %}
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
           <img src="/admin-assets/dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{user.firstName}} {{user.lastName}}</a>
         </div>
       </div>
+      {% endif %}
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <!-- Add icons to the links using the .nav-icon class
-               with font-awesome or any other icon font library -->
-          <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
-              <i class="nav-icon fas fa-tachometer-alt"></i>
-              <p>
-                {{ translator('site.menu.types')|capitalize }}
-                <i class="right fas fa-angle-left"></i>
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              <li class="nav-item">
-                <a href="/admin/types/elements" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  {{ translator('site.menu.elements')|capitalize }}
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/types/news" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  {{ translator('site.menu.news')|capitalize }}
-                </a>
-              </li>
-              <li class="nav-item">
-                <a href="/admin/types/tags" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  {{ translator('site.menu.tags')|capitalize }}
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
+
+          {% if 'admin' in auth._user.roles %}
+	          {# CONTENT HEADER #}
+	          <li class="nav-header">ADMINISTRARE</li>
+	          {# CONTENT HEADER #}
+	          
+	          {% if cms.types is not empty %}
+	          {# CMS Types #}
+	          <li class="nav-item has-treeview{% if (activeType == "type") and (activeCollection in cms.types|keys) %} menu-open{% endif %}">
+	            <a href="#" class="nav-link{% if activeType == "type" %} active{% endif %}">
+	              <i class="nav-icon fas fa-shapes"></i>
+	              <p>
+	                {{ translator('site.menu.types')|capitalize }}
+	                <i class="right fas fa-angle-left"></i>
+	              </p>
+	            </a>
+	            <ul class="nav nav-treeview">
+	              {% for cmsType in cms.types %}
+	              <li class="nav-item">
+	                <a href="{{ path_for('admin_types', { 'lang': language.lang, 'name': cmsType }) }}" class="nav-link{% if activeType == "type" and activeCollection == cmsType %} active{% endif %}">
+	                  <i class="far fa{% if activeType == "type" and activeCollection == cmsType %}-dot{% endif %}-circle"></i>
+	                  {{ cmsType|capitalize }}
+	                </a>
+	              </li>
+	              {% endfor %}
+	            </ul>
+	          </li>
+	          {# /CMS Types #}
+	          {% endif %}
+
+	          {% if cms.categories is not empty %}
+	          {# CMS Categories #}
+	          <li class="nav-item">
+	            <a href="{{ path_for('admin_categories', { 'lang': language.lang}) }}" class="nav-link{% if activeType == "category" %} active{% endif %}">
+	              <i class="fas fa-folder-open nav-icon"></i>
+	              Categorii
+	            </a>
+	          </li>
+	          {# /CMS Categories #}
+	          {% endif %}
+          {% endif %}
+
+          {% if auth._user.roles is not empty %}
+          	<li class="nav-header">CONTINUT</li>
+          	{# CMS Articles #}
+			<li class="nav-item">
+				<a href="{{ path_for('admin_articles', { 'lang': language.lang}) }}" class="nav-link{% if activeType == "article" %} active{% endif %}">
+					<i class="far fa-newspaper nav-icon"></i>
+					Articole
+				</a>
+			</li>
+			{# /CMS Articles #}
+          {% endif %}
+          
         </ul>
       </nav>
       <!-- /.sidebar-menu -->

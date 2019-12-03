@@ -1,0 +1,70 @@
+{% extends 'admin-theme/base.html.twig' %}
+
+{% block pre_head_inject %}
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/admin-assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+{% endblock %}
+
+{% block head_inject %}
+<style type="text/css">
+
+</style>
+{% endblock %}
+
+{% block content_header %}
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Administrare articole</h1>
+          </div><!-- /.col -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="{{ path_for('admin_dashboard', { 'lang': language.lang }) }}">Home</a></li>
+              <li class="breadcrumb-item active">Create Article</li>
+            </ol>
+          </div><!-- /.col -->
+        </div><!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body">
+                Card 1
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col-md-12 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+{% endblock %}
+
+{% block pre_footer_inject %}
+    
+{% endblock %}
+
+{% block footer_inject %}
+  <!-- Bootstrap Switch -->
+  <script src="/admin-assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+{% endblock %}
+
+{% block post_footer_inject %}
+  <script>
+    $(document).ready(function() {
+    });
+  </script>
+{% endblock %}

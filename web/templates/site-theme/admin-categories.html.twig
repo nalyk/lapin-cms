@@ -1,0 +1,383 @@
+{% extends 'admin-theme/base.html.twig' %}
+
+{% block pre_head_inject %}
+  <!-- DataTables -->
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-bs4/css/dataTables.bootstrap4.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+  <link rel="stylesheet" href="/admin-assets/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+  <!-- iCheck for checkboxes and radio inputs -->
+  <link rel="stylesheet" href="/admin-assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+{% endblock %}
+
+{% block content %}
+    <!-- Main content -->
+    <div class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="card">
+              <div class="card-body table-responsive">
+                <h5 class="card-title" id="grid-card-title"></h5>
+                <table id="categories-grid" class="table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Visible</th>
+                      <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tfoot>
+                    <tr>
+                      <th>Name</th>
+                      <th>Description</th>
+                      <th>Visible</th>
+                      <th>Action</th>
+                    </tr>
+                  </tfoot>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col-md-12 -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content -->
+{% endblock %}
+
+{% block pre_footer_inject %}
+    <div class="modal fade" id="category-edit">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="formEditCategoryName">Nume</label>
+                <input type="text" class="form-control" id="formEditCategoryName" placeholder="nume">
+              </div>
+              <div class="form-group">
+                <label for="formEditCategoryUrl">SEO Url</label>
+                <input type="text" class="form-control form-control-sm" id="formEditCategoryUrl" placeholder="seo-url">
+              </div>
+              <div class="form-group">
+                <label for="formEditCategoryDescription">Descriere</label>
+                <textarea class="form-control" id="formEditCategoryDescription"></textarea>
+              </div>
+              <hr />
+              <p>Colectii:<p>
+              <div class="form-group clearfix">
+                {% for cmsCategory in cms.categories %}
+                <div class="icheck-primary">
+                  <input name="editCollection" type="checkbox" data-collection="{{cmsCategory}}" id="forEditCollection-{{cmsCategory}}">
+                    <label for="forEditCollection-{{cmsCategory}}">
+                      {{cmsCategory}}
+                    </label>
+                </div>
+                {% endfor %}
+              </div>
+              <p>Visible:</p>
+              <div class="form-group clearfix">
+                <input type="checkbox" id="editCategoryVisible" name="editCategoryVisible" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveCategory" data-item="">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+
+    <div class="modal fade" id="category-add">
+      <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title"></h4>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-group">
+                <label for="formAddCategoryName">Nume</label>
+                <input type="text" class="form-control" id="formAddCategoryName" placeholder="nume">
+              </div>
+              <div class="form-group">
+                <label for="formAddCategoryDescription">Descriere</label>
+                <textarea class="form-control" id="formAddCategoryDescription"></textarea>
+              </div>
+              <hr />
+              <p>Colectii:<p>
+              <div class="form-group clearfix">
+                {% for cmsCategory in cms.categories %}
+                <div class="icheck-primary">
+                  <input name="addCollection" type="checkbox" data-collection="{{cmsCategory}}" id="forAddCollection-{{cmsCategory}}">
+                    <label for="forAddCollection-{{cmsCategory}}">
+                      {{cmsCategory}}
+                    </label>
+                </div>
+                {% endfor %}
+              </div>
+              <p>Visible:</p>
+              <div class="form-group clearfix">
+                <input type="checkbox" id="addCategoryVisible" name="addCategoryVisible" data-bootstrap-switch data-off-color="danger" data-on-color="success">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer justify-content-between">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-primary" id="addCategory">Save changes</button>
+          </div>
+        </div>
+        <!-- /.modal-content -->
+      </div>
+      <!-- /.modal-dialog -->
+    </div>
+    <!-- /.modal -->
+{% endblock %}
+
+{% block footer_inject %}
+  <!-- Defi -->
+  <script src="/admin-assets/plugins/defi/defi.min.js"></script>
+  <!-- DataTables -->
+  <script src="/admin-assets/plugins/datatables/jquery.dataTables.js"></script>
+  <script src="/admin-assets/plugins/datatables-bs4/js/dataTables.bootstrap4.js"></script>
+  <script src="/admin-assets/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+  <script src="/admin-assets/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+  <!-- Bootstrap Switch -->
+  <script src="/admin-assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+{% endblock %}
+
+{% block post_footer_inject %}
+  <script>
+    $(document).ready(function() {
+
+      var table = $("#categories-grid").DataTable( {
+          "processing": true,
+          "dom": "Bfrtip",
+          "buttons": [
+            {
+              "text": '<i class="fas fa-plus"></i>',
+              "action": function ( e, dt, node, config ) {
+                  //alert( "Button activated" );
+                  showAddDialog();
+              },
+              "className": "addCategory"
+            }
+          ],
+          "ajax": {
+            "url": "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+            "dataSrc": "items"
+          },
+          "columnDefs": [{}],
+          "columns": [
+              { "data": "name" },
+              { "data": "description" },
+              {
+                "data": "visible",
+                "render": function ( data, type, row ) {
+                  if (data == "true") {
+                    return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success" checked>';
+                  } else {
+                    return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+                  }
+                }
+              },
+              {
+                "data": null,
+                "className": "center",
+                "defaultContent": '<button type="button" class="category_edit btn btn-success btn-xs"><i class="fas fa-pencil-alt"></i> Edit</button> <button type="button" class="category_remove btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Delete</button>'
+              }
+          ],
+      } );
+
+      table.buttons().container().appendTo( '#grid-card-title:eq(0)' );
+      table.on( 'draw.dt', function () {
+        $("input[data-bootstrap-switch]").each(function(){
+          $(this).bootstrapSwitch('state', $(this).prop('checked'));
+        });
+      });
+
+      $("input[data-bootstrap-switch]").each(function(){
+        $(this).bootstrapSwitch('state', $(this).prop('checked'));
+      });
+
+      $('#categories-grid').on('click', 'button.category_remove', function (e) {
+        e.preventDefault();
+        var rowData = table.row( $(this).parents('tr') ).data();
+        $.ajax({
+            url : 'http://lapin-dev.studiotechno.md/admin/ajax/types/{{type}}',
+            type : "DELETE",
+            data: rowData
+        }).done(function(result) {
+            var items = result.items;
+            $(this).parent().parent().remove();
+            table.ajax.reload();
+        });
+      } );
+
+      $('#categories-grid').on('click', 'button.category_edit', function (e) {
+        e.preventDefault();
+        var rowData = table.row( $(this).parents('tr') ).data();
+        showEditDialog(rowData);
+      } );
+
+      $('#categories-grid').on('switchChange.bootstrapSwitch', 'input[name="tableVisibleCategory"]', function(event, state) {
+        var rowData = table.row( $(this).parents('tr') ).data();
+        var newVisible = state;
+        rowData.visible = newVisible;
+        delete rowData.createdDate;
+        delete rowData.lastModifiedDate;
+        delete rowData.createdBy;
+        delete rowData.lastModifiedBy;
+        $.ajax({
+            url: "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+            type: "PUT",
+            data: rowData
+        }).done(function(result) {
+            var items = result.items;
+            table.ajax.reload();
+        });
+      });
+
+      var showAddDialog = function() {
+        $('#category-add').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget);
+          var modal = $(this);
+          modal.find('.modal-title').text('Categorie noua');
+          modal.find('#formAddCategoryName').val('');
+          modal.find('#formAddCategoryDescription').val('');
+
+          $.each($("input[name='addCollection']"), function(){
+            $(this).prop('checked', false);
+            $(this).data( "collection", "" )
+          });
+          $("#addCategoryVisible").prop('checked', false);
+          $("#addCategoryVisible").bootstrapSwitch('state', false);
+        });
+        $('#category-add').modal('show');
+      };
+
+      $('#addCategory').on('click', function() {
+        var insertData = {};
+        insertData.name = $('#formAddCategoryName').val();
+        insertData.description = $('#formAddCategoryDescription').val();
+        var collections = [];
+        $.each($("input[name='addCollection']:checked"), function(){
+          collections.push($(this).data( "collection" ));
+        });
+        insertData.collections = collections;
+        if($('#addCategoryVisible').prop("checked") == true){
+          insertData.visible = true;
+        } else {
+          insertData.visible = false;
+        }
+
+        $.ajax({
+            url : "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+            type : "POST",
+            data: insertData
+        }).done(function(result) {
+            var items = result.items;
+            $('#category-add').modal('hide');
+            table.ajax.reload();
+        });
+      });
+
+      var showEditDialog = function(item) {
+        $('#category-edit').on('show.bs.modal', function (event) {
+          var button = $(event.relatedTarget);
+          var modal = $(this);
+          modal.find('.modal-title').text('Editare categorie');
+          modal.find('#formEditCategoryName').val(item.name);
+          modal.find('#formEditCategoryUrl').val(item.url);
+          modal.find('#formEditCategoryDescription').val(item.description);
+          $.each($("input[name='editCollection']"), function(){
+            $(this).prop('checked', false);
+          });
+          $.each(item.collections, function( index, value ) {
+            $("#forEditCollection-"+value).prop('checked', true);
+          });
+          if(item.visible == 'true'){
+            $("#editCategoryVisible").prop('checked', true);
+            $("#editCategoryVisible").bootstrapSwitch('state', true);
+          } else {
+            $("#editCategoryVisible").prop('checked', false);
+            $("#editCategoryVisible").bootstrapSwitch('state', false);
+          }
+          console.log('edit visible state', $("#editCategoryVisible").prop('checked'))
+          /*
+          $("input[data-bootstrap-switch]").each(function(){
+            $(this).bootstrapSwitch('state', $(this).prop('checked'));
+          });
+          */
+          modal.find('#saveCategory').data( "item", item.id );
+        });
+        $('#category-edit').modal('show');
+      };
+
+      $('#category-edit').on('shown.bs.modal', function (event) {
+        console.log('modal shown');
+        /*
+        const catEdit = {};
+        defi.bindNode(catEdit, {
+          url: '#formEditCategoryUrl'
+        });        
+        
+        defi.on(catEdit, 'change:url', function (event) {
+          console.log('Category name is changed');
+          console.log(event);
+          $('#formEditCategoryUrl').val(event.onChangeValue);
+        });
+        defi.on(catEdit, 'change:url', () => console.log('Category URL is changed'));
+        */
+      });
+
+      $('#saveCategory').on('click', function() {
+        var updateData = {
+          id: $('#saveCategory').data("item"),
+          name: $('#formEditCategoryName').val(),
+          description: $('#formEditCategoryDescription').val()
+        }
+        var collections = [];
+        $.each($("input[name='editCollection']:checked"), function(){
+          collections.push($(this).data( "collection" ));
+        });
+        updateData.collections = collections;
+        if($('#editCategoryVisible').prop("checked") == true){
+          updateData.visible = true;
+        } else {
+          updateData.visible = false;
+        }
+
+        $.ajax({
+            url: "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+            type: "PUT",
+            data: updateData
+        }).done(function(result) {
+            var items = result.items;
+            $('#category-edit').modal('hide');
+            table.ajax.reload();
+        });
+      });
+
+    });
+  </script>
+{% endblock %}

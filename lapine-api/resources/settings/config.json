@@ -1,0 +1,21 @@
+{
+	"type": "Collection",
+	"properties": {
+		"kinds": {
+			"name": "kinds",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "kinds",
+			"order": 0
+		},
+		"categories": {
+			"name": "categories",
+			"type": "object",
+			"typeLabel": "object",
+			"required": false,
+			"id": "categories",
+			"order": 1
+		}
+	}
+}
