@@ -9,6 +9,12 @@ c(")(")
 <h3 align="center">Lapin CMS</h3>
 <h6 align="center">Slim 3 RAD Skeleton</h6>
 
+<div align="center">
+
+  [![Software License](https://img.shields.io/badge/license-MIT-brightgreen.svg)](LICENSE.md)
+
+</div>
+
 This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backend API and third-party libraries.
 
 **Documentation is still in progress. Hold on.**
