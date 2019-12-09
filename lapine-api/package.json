@@ -3,7 +3,7 @@
     "node": ">= 4.0"
   },
   "dependencies": {
-    "deployd": "^1.1.2",
+    "deployd": "^1.2.0",
     "dpd-clientlib": "^0.0.1",
     "dpd-collection-systemfields": "^1.0.0",
     "dpd-count": "0.0.1",
