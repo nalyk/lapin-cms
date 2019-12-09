@@ -7,7 +7,7 @@ c(")(")
 </h1>
 
 <h3 align="center">Lapin CMS</h3>
-<h6 align="center">Slim 4 RAD Skeleton</h6>
+<h6 align="center">Slim 3 RAD Skeleton</h6>
 
 This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backend API and third-party libraries.
 
