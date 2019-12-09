@@ -8,6 +8,7 @@
     "dpd-collection-systemfields": "^1.0.0",
     "dpd-count": "0.0.1",
     "dpd-dashboard": "^0.0.1",
-    "dpd-event": "^1.1.2"
+    "dpd-event": "^1.1.2",
+    "ws": "^7.2.0"
   }
 }
