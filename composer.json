@@ -1,4 +1,6 @@
 {
+    "name": "nalyk/lapin-cms",
+    "description": "A Slim 3 RAD skeleton",
     "require": {
         "slim/slim": "^3.8",
         "slim/csrf": "^0.8.2",

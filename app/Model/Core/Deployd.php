@@ -95,6 +95,18 @@ class Deployd
                 $response["_error"] = Psr7\str($e->getResponse());
 			}
     	} elseif ($query == null) {
+            $res = $this->guzzle->request("GET", $this->apiserver."/".$collection."/".$id);
+            $statuscode = $res->getStatusCode();
+            if (200 === $statuscode) {
+                $response["_status"] = true;
+                $response["data"] = json_decode($res->getBody(), true);
+            } elseif (404 === $statuscode) {
+                $response["_status"] = false;
+                $response["_error"] = "Object does not exist";
+            } else {
+                throw new ClientException(Psr7\str($e->getResponse()));
+            }
+            /*
             try {
                 $res = $this->guzzle->request("GET", $this->apiserver."/".$collection."/".$id);
                 $response["_status"] = true;
@@ -105,6 +117,7 @@ class Deployd
                 $response["_status"] = false;
                 $response["_error"] = Psr7\str($e->getResponse());
             }
+            */
         } else {
             try {
                 $res = $this->guzzle->request("GET", $this->apiserver."/".$collection."/?".$query);

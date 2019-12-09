@@ -215,6 +215,7 @@ class ContainerServices
                         'headers' => ['Connection' => 'close'],
                         CURLOPT_FORBID_REUSE => true,
                         CURLOPT_FRESH_CONNECT => true,
+                        'http_errors' => false
                     ]
             );
 
