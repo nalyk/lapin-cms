@@ -40,12 +40,6 @@ This is a CMS based on Slim Framework (with MVC pattern), Deployd for the backen
 ## php -S localhost:8080 -t public public/index.php
 
 ## Routes
-### Deployd Objects
-- /deployd/new - GET - new object form
-- /deployd/create - POST - new object
-- /deployd/update - PUT - update object
-- /deployd/edit/{id} - GET - edit object form
-- /deployd/delete/{id} - DELETE - delete object
 
 ## Added libs
 - https://github.com/DavidePastore/Slim-Validation
