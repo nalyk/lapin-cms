@@ -3,11 +3,20 @@
 {% block pre_head_inject %}
   <!-- iCheck for checkboxes and radio inputs -->
   <link rel="stylesheet" href="/admin-assets/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+  <!-- Froala -->
+  <link href="/admin-assets/plugins/wysiwyg-editor/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" />
 {% endblock %}
 
 {% block head_inject %}
 <style type="text/css">
-
+div.fr-wrapper>div>a {
+    /* display: none !important; */
+    /* position: fixed; */
+    /* z-index: -99999 !important; */
+    font-size: 0px !important;
+    padding: 0px !important;
+    height: 0px !important;
+}
 </style>
 {% endblock %}
 
@@ -17,7 +26,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Administrare articole</h1>
+            <h1 class="m-0 text-dark">Creare articol</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
@@ -36,16 +45,41 @@
     <div class="content">
       <div class="container-fluid">
         <div class="row">
-          <div class="col-lg-12">
+          <div class="col-md-9">
+            <div class="card card-default" id="article-general">
+                        <div class="card-header">
+                          <h3 class="card-title">General</h3>
+
+                          <div class="card-tools">
+                            <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                              <i class="fas fa-minus"></i></button>
+                          </div>
+                        </div>
+                        <div class="card-body">
+                          <div class="form-group">
+                            <label for="inputHeadline">Titlu</label>
+                            <input type="text" id="inputHeadline" class="form-control">
+                          </div>
+                          <div class="form-group">
+                            <label for="inputAbstract">Lead</label>
+                            <textarea id="inputAbstract" class="form-control"></textarea>
+                          </div>
+                        </div>
+                        <!-- /.card-body -->
+                      </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col-md-9 -->
+          <div class="col-md-3">
             <div class="card">
               <div class="card-body">
-                Card 1
+                Card 2
               </div>
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
           </div>
-          <!-- /.col-md-12 -->
+          <!-- /.col-md-3 -->
         </div>
         <!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -60,11 +94,43 @@
 {% block footer_inject %}
   <!-- Bootstrap Switch -->
   <script src="/admin-assets/plugins/bootstrap-switch/js/bootstrap-switch.min.js"></script>
+  <!-- Froala -->
+  <script type="text/javascript" src="/admin-assets/plugins/wysiwyg-editor/js/froala_editor.pkgd.js"></script>
 {% endblock %}
 
 {% block post_footer_inject %}
   <script>
     $(document).ready(function() {
+      function focusCard(element) {
+        $( element ).removeClass( "card-default" );
+        $( element ).addClass( "card-primary" );
+      }
+      function unfocusCard(element) {
+        $( element ).removeClass( "card-primary" );
+        $( element ).addClass( "card-default" );
+      }
+      new FroalaEditor("#inputAbstract", {
+        apiKey: "demo",
+        attribution: false,
+        quickInsertEnabled: false,
+        toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'insertLink', 'undo', 'redo', 'clearFormatting', 'html'],
+        events: {
+          'focus': function (e) {
+            // this is the editor instance.
+            focusCard("#article-general");
+          },
+          'blur': function (e) {
+            // this is the editor instance.
+            unfocusCard("#article-general");
+          }
+        }
+      });
+      $( "#article-general input, #article-general textarea" ).focusin(function() {
+        focusCard("#article-general");
+      });
+      $( "#article-general input, #article-general textarea" ).focusout(function() {
+        unfocusCard("#article-general");
+      });
     });
   </script>
 {% endblock %}
