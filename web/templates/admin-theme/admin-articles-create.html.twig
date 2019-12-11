@@ -26,7 +26,20 @@ div.fr-wrapper>div>a {
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Creare articol</h1>
+            <h1 class="m-0 text-dark">
+              Creare articol
+              <span class="dropdown">
+                <button class="btn btn-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  <i class="fas fa-plus"></i>  Add element
+                </button>
+                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <a class="dropdown-item" href="#"><i class="far fa-file-alt fa-fw"></i> Simple text</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-file-video fa-fw"></i> Video</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-file-image fa-fw"></i> Image</a>
+                  <a class="dropdown-item" href="#"><i class="fas fa-quote-right fa-fw"></i> Quote</a>
+                </div>
+              </span>
+            </h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
