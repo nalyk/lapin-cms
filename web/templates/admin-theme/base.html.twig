@@ -1,9 +1,5 @@
 {% set isAuth = auth['_status'] %}
 <!DOCTYPE html>
-<!--
-This is a starter template page. Use this page to start your new project from
-scratch. This page gets rid of all links and provides the needed markup only.
--->
 <html lang="ro">
 <head>
   <meta charset="utf-8">
@@ -15,8 +11,51 @@ scratch. This page gets rid of all links and provides the needed markup only.
   <link rel="dns-prefetch" href="https://fonts.gstatic.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
   <link rel="preload" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" as="fetch" crossorigin="anonymous">
+
+  {#/* Source Sans Pro, italic, 400 */#}
+  {#/* cyrillic-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7qsDJT9g.woff2" as="font" crossorigin="anonymous">
+  {#/* cyrillic */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7jsDJT9g.woff2" as="font" crossorigin="anonymous">
+  {#/* latin-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7psDJT9g.woff2" as="font" crossorigin="anonymous">
+  {#/* latin */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK1dSBYKcSV-LCoeQqfX1RYOo3qPZ7nsDI.woff2" as="font" crossorigin="anonymous">
+
+  {#/* Source Sans Pro, normal, 300 */#}
+  {#/* cyrillic-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmhduz8A.woff2" as="font" crossorigin="anonymous">
+  {#/* cyrillic */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwkxduz8A.woff2" as="font" crossorigin="anonymous">
+  {#/* latin-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwmRduz8A.woff2" as="font" crossorigin="anonymous">
+  {#/* latin */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ik4zwlxdu.woff2" as="font" crossorigin="anonymous">
+
+  {#/* Source Sans Pro, normal, 400 */#}
+  {#/* cyrillic-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNa7lqDY.woff2" as="font" crossorigin="anonymous">
+  {#/* cyrillic */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK3dSBYKcSV-LCoeQqfX1RYOo3qPK7lqDY.woff2" as="font" crossorigin="anonymous">
+  {#/* latin-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK3dSBYKcSV-LCoeQqfX1RYOo3qNq7lqDY.woff2" as="font" crossorigin="anonymous">
+  {#/* latin */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xK3dSBYKcSV-LCoeQqfX1RYOo3qOK7l.woff2" as="font" crossorigin="anonymous">
+
+  {#/* Source Sans Pro, normal, 700 */#}
+  {#/* cyrillic-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmhduz8A.woff2" as="font" crossorigin="anonymous">
+  {#/* cyrillic */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwkxduz8A.woff2" as="font" crossorigin="anonymous">
+  {#/* latin-ext */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwmRduz8A.woff2" as="font" crossorigin="anonymous">
+  {#/* latin */#}
+  <link rel="preload" href="https://fonts.gstatic.com/s/sourcesanspro/v13/6xKydSBYKcSV-LCoeQqfX1RYOo3ig4vwlxdu.woff2" as="font" crossorigin="anonymous">
+  
+  
   <link rel="preload" href="/admin-assets/plugins/fontawesome-free/webfonts/fa-solid-900.woff2" as="font" crossorigin="anonymous">
   <link rel="preload" href="/admin-assets/plugins/fontawesome-free/webfonts/fa-regular-400.woff2" as="font" crossorigin="anonymous">
+
 
   {% block pre_head_inject %}
   {% endblock %}
