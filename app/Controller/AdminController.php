@@ -122,6 +122,8 @@ class AdminController
         $data["language"] = $language;
         $user = @$this->container->deployd->get('users', $request->getAttribute('auth')["_user"]->id, null);
         $data["user"] = $user["data"];
+        $ismobile = $request->isMobile() ? true : false;
+        $data["ismobile"] = $ismobile;
         /* /END common variables */
 
         $data["parrentCategories"] = $this->getCmsMainCategories();
@@ -146,6 +148,8 @@ class AdminController
         $data["language"] = $language;
         $user = @$this->container->deployd->get('users', $request->getAttribute('auth')["_user"]->id, null);
         $data["user"] = $user["data"];
+        $ismobile = $request->isMobile() ? true : false;
+        $data["ismobile"] = $ismobile;
         /* /END common variables */
 
         $data["parrentCategories"] = $this->getCmsMainCategories();

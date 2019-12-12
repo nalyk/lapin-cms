@@ -27,35 +27,18 @@ div.fr-wrapper>div>a {
    border-radius: .25rem !important;
    border-color: #ced4da !important;
 }
+.sticky-subheader {
+  top: 57px !important;
+}
 </style>
 {% endblock %}
 
 {% block content_header %}
     <!-- Content Header (Page header) -->
-    <div class="content-header">
+    <div class="content-header sticky-top sticky-subheader">
       <div class="container-fluid">
         <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">
-              Articol nou
-              <span class="dropdown">
-                <button class="btn bg-gradient-success dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                  <i class="fas fa-plus"></i>  Adaugă element
-                </button>
-                <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <a class="dropdown-item" href="javascript:void();" data-element-type="text"><i class="far fa-file-alt fa-fw"></i> Simple text</a>
-                  <a class="dropdown-item" href="javascript:void();" data-element-type="video"><i class="fas fa-file-video fa-fw"></i> Video</a>
-                  <a class="dropdown-item" href="javascript:void();" data-element-type="image"><i class="fas fa-file-image fa-fw"></i> Image</a>
-                  <a class="dropdown-item" href="javascript:void();" data-element-type="quote"><i class="fas fa-quote-right fa-fw"></i> Quote</a>
-                </div>
-              </span>
-            </h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ path_for('admin_dashboard', { 'lang': language.lang }) }}">Home</a></li>
-              <li class="breadcrumb-item active">Create Article</li>
-            </ol>
+          <div class="col-sm-12">
           </div><!-- /.col -->
         </div><!-- /.row -->
       </div><!-- /.container-fluid -->
@@ -67,8 +50,27 @@ div.fr-wrapper>div>a {
     <!-- Main content -->
     <div class="content">
       <div class="container-fluid">
-        <div class="row">
+        <div class="row mt-2">
           <div class="col-md-9">
+            <div class="card sticky-top sticky-subheader">
+              <div class="card-body">
+                <h2 class="m-0 text-dark">
+                  Articol nou
+                  <span class="dropdown float-right">
+                    <button class="btn bg-gradient-success dropdown-toggle" type="button" id="dropdownMenuElements" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="fas fa-plus"></i><span class="d-none d-sm-inline">  Adaugă element</span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuElements">
+                      <a class="dropdown-item" href="javascript:void();" data-element-type="text"><i class="far fa-file-alt fa-fw"></i> Simple text</a>
+                      <a class="dropdown-item" href="javascript:void();" data-element-type="video"><i class="fas fa-file-video fa-fw"></i> Video</a>
+                      <a class="dropdown-item" href="javascript:void();" data-element-type="image"><i class="fas fa-file-image fa-fw"></i> Image</a>
+                      <a class="dropdown-item" href="javascript:void();" data-element-type="quote"><i class="fas fa-quote-right fa-fw"></i> Quote</a>
+                    </div>
+                  </span>
+                </h2>
+              </div>
+            </div>
+
             <div class="card card-default" id="article-general">
               <div class="card-header">
                 <h3 class="card-title">General</h3>
@@ -93,17 +95,17 @@ div.fr-wrapper>div>a {
                     <h3 class="text-muted">Trage imaginea AICI</h3>
 
                     <div class="btn bg-gradient-secondary mb-2">
-                        <span><i class="fas fa-upload fa-fw"></i> Din fișiere locale</span>
+                        <span><i class="fas fa-upload fa-fw"></i><span class="d-none d-sm-inline"> Din fișiere locale</span></span>
                         <input type="file" title="Click to add File">
                     </div>
 
                     <div class="btn bg-gradient-secondary mb-2">
-                        <span><i class="fas fa-cloud-upload-alt fa-fw"></i> De pe web</span>
+                        <span><i class="fas fa-cloud-upload-alt fa-fw"></i><span class="d-none d-sm-inline"> De pe web</span></span>
                         <input type="hidden" title="Click to add URL">
                     </div>
 
                     <div class="btn bg-gradient-secondary mb-2">
-                        <span><i class="fas fa-photo-video fa-fw"></i></i> Din arhivă</span>
+                        <span><i class="fas fa-photo-video fa-fw"></i></i><span class="d-none d-sm-inline"> Din arhivă</span></span>
                         <input type="hidden" title="Click to add Media URL">
                     </div>
                   </div>
@@ -119,7 +121,7 @@ div.fr-wrapper>div>a {
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-            <div id="elements-placeholder">
+            <div id="elements-placeholder" class="connectedSortable">
             </div>
           </div>
           <!-- /.col-md-9 -->
@@ -127,9 +129,9 @@ div.fr-wrapper>div>a {
             <div class="card">
               <div class="card-body">
                 <div class="btn-group btn-block" role="group" aria-label="Basic example">
-                  <button type="button" class="btn bg-gradient-success"><i class="fas fa-save fa-fw"></i> Save</button>
-                  <button type="button" class="btn bg-gradient-warning"><i class="fas fa-file-export fa-fw"></i> Save&amp;Close</button>
-                  <button type="button" class="btn bg-gradient-danger"><i class="fas fa-times fa-fw"></i> Close</button>
+                  <button type="button" class="btn bg-gradient-success"><i class="fas fa-save fa-fw"></i><span class="d-none d-sm-inline"> Save</span></button>
+                  <button type="button" class="btn bg-gradient-warning"><i class="fas fa-file-export fa-fw"></i><span class="d-none d-sm-inline"> Save&amp;Close</span></button>
+                  <button type="button" class="btn bg-gradient-danger"><i class="fas fa-times fa-fw"></i><span class="d-none d-sm-inline"> Close</span></button>
                 </div>
               </div>
               <!-- /.card-body -->
@@ -157,26 +159,96 @@ div.fr-wrapper>div>a {
   <script type="text/javascript" src="/admin-assets/plugins/mustache/mustache.min.js"></script>
   <!-- Uploader -->
   <script type="text/javascript" src="/admin-assets/plugins/uploader/dist/js/jquery.dm-uploader.min.js"></script>
+  <!-- resizeSensor.js -->
+  <script type="text/javascript" src="/admin-assets/plugins/theia-sticky-sidebar/dist/resizeSensor.min.js"></script>
+  <!-- Theia Sticky Sidebar -->
+  <script type="text/javascript" src="/admin-assets/plugins/theia-sticky-sidebar/dist/theia-sticky-sidebar.min.js"></script>
 {% endblock %}
 
 {% block post_footer_inject %}
   <script id="text-element" type="x-tmpl-mustache">
-            <div class="card card-default" id="[[elementId]]">
+            <div class="card card-default card-element ui-sortable" id="[[elementId]]">
               <div class="card-header">
                 <h3 class="card-title">Text element</h3>
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
                     <i class="fas fa-minus"></i>
                   </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                  </button>
                 </div>
               </div>
               <div class="card-body">
                 <div class="form-group">
-                  <label for="inputHeadline-[[elementId]]">Titlu</label>
+                  <label for="inputHeadline-[[elementId]]">Titlu <em>(opţional)</em></label>
                   <input type="text" id="inputHeadline-[[elementId]]" class="form-control">
                 </div>
                 <div class="form-group">
                   <label for="inputContent-[[elementId]]">Continut</label>
+                  <textarea id="inputContent-[[elementId]]" class="form-control"></textarea>
+                </div>
+                <div class="form-group">
+                  <label for="inputSource-[[elementId]]">Sursa <em>(opţional)</em></label>
+                  <input type="text" id="inputSource-[[elementId]]" class="form-control form-control-sm">
+                </div>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+  </script>
+
+  <script id="image-element" type="x-tmpl-mustache">
+            <div class="card card-default card-element ui-sortable" id="[[elementId]]">
+              <div class="card-header">
+                <h3 class="card-title">Image element</h3>
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip" title="Collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove" data-toggle="tooltip" title="Remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="form-group">
+                  <label for="inputHeadline-[[elementId]]">Titlu <em>(opţional)</em></label>
+                  <input type="text" id="inputHeadline-[[elementId]]" class="form-control">
+                </div>
+                <div class="row ml-0">
+                  <div id="picture-element-[[elementId]]" class="dm-uploader text-center col-md-6">
+                    <h3 class="text-muted">Trage imaginea AICI</h3>
+
+                    <div class="btn bg-gradient-secondary mb-2">
+                        <span><i class="fas fa-upload fa-fw"></i><span class="d-none d-sm-inline"> Din fișiere locale</span></span>
+                        <input type="file" title="Click to add File">
+                    </div>
+
+                    <div class="btn bg-gradient-secondary mb-2">
+                        <span><i class="fas fa-cloud-upload-alt fa-fw"></i><span class="d-none d-sm-inline"> De pe web</span></span>
+                        <input type="hidden" title="Click to add URL">
+                    </div>
+
+                    <div class="btn bg-gradient-secondary mb-2">
+                        <span><i class="fas fa-photo-video fa-fw"></i></i><span class="d-none d-sm-inline"> Din arhivă</span></span>
+                        <input type="hidden" title="Click to add Media URL">
+                    </div>
+                  </div>
+                  <div class="col-md-6">
+                      <div class="card h-100">
+                        <ul class="list-unstyled p-2 d-flex flex-column col" id="associatedFile">
+                          <li class="text-muted text-center empty">No files uploaded.</li>
+                        </ul>
+                      </div>
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="inputSource-[[elementId]]">Sursa</label>
+                  <input type="text" id="inputSource-[[elementId]]" class="form-control form-control-sm">
+                </div>
+                <div class="form-group">
+                  <label for="inputContent-[[elementId]]">Continut <em>(opţional)</em></label>
                   <textarea id="inputContent-[[elementId]]" class="form-control"></textarea>
                 </div>
               </div>
@@ -203,15 +275,97 @@ div.fr-wrapper>div>a {
 
       function add_file(id, file) {
         console.log('Added file');
-        console.log('Added file');
+        //console.log('Added file');
         // more code
       }
+
+      function generateElementId() {
+        var randomId = Math.floor((Math.random() * 1000) + 1);
+        var presentIds = [];
+        $( ".card-element" ).each(function( index ) {
+          var presentId = $( this ).attr('id');
+          if (typeof presentId !== 'undefined') {
+            presentIds.push(presentId);
+          }
+        });
+        if(presentIds.includes(randomId)) {
+          return generateElementId()
+        } else {
+          return randomId
+        }
+      }
+
+      function makeDraggable() {
+        $('.connectedSortable').sortable({
+          placeholder         : 'sort-highlight',
+          connectWith         : '.connectedSortable',
+          handle              : '.card-header, .nav-tabs',
+          forcePlaceholderSize: true,
+          zIndex              : 999999
+        });
+        $('.connectedSortable .card-header, .connectedSortable .nav-tabs-custom').css('cursor', 'move');
+      }  
 
       function addElement(type) {
         var template = $('#'+type+'-element').html();
         Mustache.parse(template);   // optional, speeds up future uses
-        var rendered = Mustache.render(template, {elementId: "115"});
+        
+        var count = $("#elements-placeholder div.card-element").length;
+        var randomId = generateElementId();
+        var templateData = {
+          elementId: randomId
+        }
+        var rendered = Mustache.render(template, templateData);
+
+        $("#article-general").CardWidget("collapse");
+        $( ".card-element" ).each(function( index ) {
+          $( this ).CardWidget("collapse");
+        });        
         $(rendered).hide().appendTo("#elements-placeholder").fadeIn(1000);
+        $('body, html').animate({ scrollTop: $("#"+randomId).offset().top }, 1000);
+        initiateEditor("#inputContent-"+randomId);
+        makeDraggable();
+      }
+
+      function initiateEditor(element) {
+        //console.log("element", element);
+        new FroalaEditor(element, {
+          apiKey: "demo",
+          attribution: false,
+          quickInsertEnabled: true,
+          autofocus: true,
+          toolbarButtons: {
+            'moreText': {
+              'buttons': ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'fontFamily', 'fontSize', 'textColor', 'backgroundColor', 'clearFormatting']
+            },
+            'moreParagraph': {
+              'buttons': ['alignLeft', 'alignCenter', 'alignRight', 'alignJustify', 'formatOLSimple', 'formatOL', 'formatUL', 'paragraphFormat', 'lineHeight', 'outdent', 'indent', 'quote']
+            },
+            'moreRich': {
+              'buttons': ['insertLink', 'insertImage', 'insertVideo', 'insertTable', 'emoticons', 'fontAwesome', 'specialCharacters', 'embedly', 'insertFile', 'insertHR']
+            },
+            'moreMisc': {
+              'buttons': ['undo', 'redo', 'selectAll', 'html'],
+              'align': 'right',
+              'buttonsVisible': 2
+            }
+          },
+          events: {
+            'initialized': function () {
+              // Do something here.
+              // this is the editor instance.
+              //console.log(this);
+            },
+            'focus': function (e) {
+              // this is the editor instance.
+              //focusCard("#article-general");
+            },
+            'blur': function (e) {
+              // this is the editor instance.
+              //unfocusCard("#article-general");
+            },
+          }
+        });
       }
 
       $("a[data-element-type]").on('click',function(event) {
@@ -219,7 +373,7 @@ div.fr-wrapper>div>a {
         var type = null;
         type = $(this).data("element-type");
         if (type !== null) {
-          console.log('element-type', type);
+          //console.log('element-type', type);
           addElement(type);
         }
       });
@@ -228,6 +382,7 @@ div.fr-wrapper>div>a {
         apiKey: "demo",
         attribution: false,
         quickInsertEnabled: false,
+        autofocus: true,
         toolbarButtons: ['bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', 'insertLink', 'undo', 'redo', 'clearFormatting', 'html'],
         events: {
           'focus': function (e) {
@@ -263,20 +418,20 @@ div.fr-wrapper>div>a {
         },
         onInit: function(){
           // Plugin is ready to use
-          console.log('Plugin is ready to use');
+          //console.log('Plugin is ready to use');
         },
         onComplete: function(){
           // All files in the queue are processed (success or error)
-          console.log('All pending tranfers finished');
+          //console.log('All pending tranfers finished');
         },
         onNewFile: function(id, file){
           // When a new file is added using the file selector or the DnD area
-          console.log('New file added #' + id);
+          //console.log('New file added #' + id);
           //ui_multi_add_file(id, file);
         },
         onBeforeUpload: function(id){
           // about tho start uploading a file
-          console.log('Starting the upload of #' + id);
+          //console.log('Starting the upload of #' + id);
           //ui_multi_update_file_progress(id, 0, '', true);
           //ui_multi_update_file_status(id, 'uploading', 'Uploading...');
         },
@@ -286,8 +441,8 @@ div.fr-wrapper>div>a {
         },
         onUploadSuccess: function(id, data){
           // A file was successfully uploaded
-          console.log('Server Response for file #' + id + ': ' + JSON.stringify(data));
-          console.log('Upload of file #' + id + ' COMPLETED');
+          //console.log('Server Response for file #' + id + ': ' + JSON.stringify(data));
+          //console.log('Upload of file #' + id + ' COMPLETED');
           //ui_multi_update_file_status(id, 'success', 'Upload Complete');
           //ui_multi_update_file_progress(id, 100, 'success', false);
         },
@@ -298,10 +453,10 @@ div.fr-wrapper>div>a {
         },
         onFallbackMode: function(){
           // When the browser doesn't support this plugin :(
-          console.log('Plugin cant be used here, running Fallback callback');
+          //console.log('Plugin cant be used here, running Fallback callback');
         },
         onFileSizeError: function(file){
-          console.log('File \'' + file.name + '\' cannot be added: size excess limit');
+          //console.log('File \'' + file.name + '\' cannot be added: size excess limit');
         }
       });
     });
