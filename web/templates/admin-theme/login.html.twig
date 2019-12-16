@@ -62,6 +62,8 @@
           <!-- /.col -->
         </div>
         <input type="hidden" id="redirect" name="redirect" value="{{redirect}}">
+        <input type="hidden" name="{{csrf.keys.name}}" value="{{csrf.name}}">
+        <input type="hidden" name="{{csrf.keys.value}}" value="{{csrf.value}}">
       </form>
 
       <div class="social-auth-links text-center mb-3">

@@ -1,85 +1,96 @@
 <div class="dynamic-ajax-content">
-    <div class="row">
-        <div class="col-lg-12">
-            <form>
-              <div class="form-group">
-                <label for="modalform-name">Nume</label>
-                <input type="text" class="form-control" id="modalform-name" placeholder="nume">
-              </div>
-              <div class="form-group">
-                <label for="modalform-description">Descriere</label>
-                <textarea class="form-control" id="modalform-description"></textarea>
-              </div>
-            </form>
+  <div class="row">
+    <div class="col-lg-12">
+      <form>
+        <div class="form-group">
+          <label for="modalform-name">Nume</label>
+          <input type="text" class="form-control" id="modalform-name" placeholder="nume">
         </div>
+        <div class="form-group">
+          <label for="modalform-description">Descriere</label>
+          <textarea class="form-control" id="modalform-description"></textarea>
+        </div>
+      </form>
     </div>
-    <script type="text/javascript">
-        jQuery(function ($) {
-            var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
-            $("#" + currentParentModal.options.id).on(currentParentModal.options.ajaxContainerReadyEventName, function (event, modal) {
+  </div>
+  <script type="text/javascript">
+	jQuery(function ($) {
+	  var currentParentModal = BootstrapModalWrapperFactory.globalModals[BootstrapModalWrapperFactory.globalModals.length - 1];
+	  $("#" + currentParentModal.options.id).on(currentParentModal.options.ajaxContainerReadyEventName, function (event, modal) {
 
-            	var collection = modal.options.localData.collection;
-            	var action = modal.options.localData.action;
+	    var collection = modal.options.localData.collection;
+	    var action = modal.options.localData.action;
 
-                modal.addButton({
-                    label: "Close",
-                    cssClass: "btn btn-default",
-                    action: function (button, buttonData, originalEvent) {
-                        return this.hide();
-                    }
-                });
-                if (action == "add") {
-                	modal.addButton({
-	                    label: "Save",
-	                    cssClass: "btn btn-primary",
-	                    action: function (button, buttonData, originalEvent) {
-	                        //this.options.localData.funRef();
-	                        var insertData = {
-					          collection: collection,
-					          name: $('#modalform-name').val(),
-					          description: $('#modalform-description').val()
-					        }
-					        $.ajax({
-					            url : "http://lapin-dev.studiotechno.md/ro/admin/ajax/types/"+collection,
-					            type : "POST",
-					            data: insertData
-					        }).done(function(result) {
-					            var items = result.items;
-					            modal.hide();
-					            modal.options.localData.table.ajax.reload();
-					        });
-	                    }
-	                });
-                }
-                if (action == "edit") {
-                	var item = modal.options.localData.item;
+	    modal.addButton({
+	      label: "Close",
+	      cssClass: "btn btn-default",
+	      action: function (button, buttonData, originalEvent) {
+	        return this.hide();
+	      }
+	    });
 
-                	$('#modalform-name').val(item.name);
-                	$('#modalform-description').val(item.description);
-                	
-                	modal.addButton({
-	                    label: "Save",
-	                    cssClass: "btn btn-primary",
-	                    action: function (button, buttonData, originalEvent) {
-	                        //this.options.localData.funRef();
-	                        var updateData = {
-	                        	id: item.id,
-	                        	name: $('#modalform-name').val(),
-					          	description: $('#modalform-description').val()
-					        }
-					        $.ajax({
-					            url : "http://lapin-dev.studiotechno.md/ro/admin/ajax/types/"+collection,
-					            type : "PUT",
-					            data: updateData
-					        }).done(function(result) {
-					            var items = result.items;
-					            modal.hide();
-					            modal.options.localData.table.ajax.reload();
-					        });
-	                    }
-	                });
-                }
-            });
-        });
-    </script>
+	    var csrfName = "{{csrf.name}}";
+        var csrfValue = "{{csrf.value}}";
+
+	    // ADD Action
+	    if (action == "add") {
+	      modal.addButton({
+	        label: "Save",
+	        cssClass: "btn btn-primary",
+	        action: function (button, buttonData, originalEvent) {
+	          //this.options.localData.funRef();
+	          var insertData = {
+	            collection: collection,
+	            name: $('#modalform-name').val(),
+	            description: $('#modalform-description').val(),
+	            csrf_name: "{{csrf.name}}",
+                csrf_value: "{{csrf.value}}"
+	          }
+	          $.ajax({
+	            url: "http://lapin-dev.studiotechno.md/ro/admin/ajax/types/" + collection,
+	            type: "POST",
+	            data: insertData
+	          }).done(function (result) {
+	            var items = result.items;
+	            modal.hide();
+	            modal.options.localData.table.ajax.reload();
+	          });
+	        }
+	      });
+	    }
+
+	    // EDIT Action
+	    if (action == "edit") {
+	      var item = modal.options.localData.item;
+
+	      $('#modalform-name').val(item.name);
+	      $('#modalform-description').val(item.description);
+
+	      modal.addButton({
+	        label: "Save",
+	        cssClass: "btn btn-primary",
+	        action: function (button, buttonData, originalEvent) {
+	          //this.options.localData.funRef();
+	          var updateData = {
+	            id: item.id,
+	            name: $('#modalform-name').val(),
+	            description: $('#modalform-description').val(),
+	            csrf_name: "{{csrf.name}}",
+                csrf_value: "{{csrf.value}}"
+	          }
+	          $.ajax({
+	            url: "http://lapin-dev.studiotechno.md/ro/admin/ajax/types/" + collection,
+	            type: "PUT",
+	            data: updateData
+	          }).done(function (result) {
+	            var items = result.items;
+	            modal.hide();
+	            modal.options.localData.table.ajax.reload();
+	          });
+	        }
+	      });
+	    }
+	  });
+	});
+  </script>
 </div>

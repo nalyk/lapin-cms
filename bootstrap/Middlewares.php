@@ -37,7 +37,7 @@ class Middlewares
      */
     public function registerMiddlewares()
     {
-        //$this->registerCsrf();
+        $this->registerCsrf();
         $this->registerSession();
         $this->registerLanguage();
         $this->registerIpAddress();

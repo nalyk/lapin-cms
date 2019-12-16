@@ -118,7 +118,7 @@ class ContainerServices
     {
         $this->registerService('csrf', function () {
             $csrf = new \Slim\Csrf\Guard();
-            $csrf->setPersistentTokenMode(false);
+            $csrf->setPersistentTokenMode(true);
 
             return $csrf;
         });

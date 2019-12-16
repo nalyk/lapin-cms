@@ -49,6 +49,7 @@ class Router
                 });
                 $this->any('/categories[/{name}]', AdminController::class . ':ajaxCategories')->setName('admin_ajax_categories');
                 $this->any('/articles[/{id}]', AdminController::class . ':ajaxArticles')->setName('admin_ajax_articles');
+                $this->post('/uploadImage', AdminController::class . ':ajaxUploadImage')->setName('admin_ajax_upload_mage');
                 $this->group('/modal', function() {
                     $this->any('/{name}', AdminController::class . ':ajaxModal')->setName('admin_ajax_modal');
                 });

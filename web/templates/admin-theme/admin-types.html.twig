@@ -146,116 +146,124 @@
 
 {% block post_footer_inject %}
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
 
-      	var table = $("#types-grid").DataTable( {
-          	"processing": true,
-          	"dom": "Bfrtip",
-          	"buttons": [
-            	{
-              		"text": '<i class="fas fa-plus"></i>',
-              		"action": function ( e, dt, node, config ) {
-                  		//alert( "Button activated" );
-                  		showAddDialog(e);
-              		},
-              		"className": "addType"
-            	}
-          	],
-          	"ajax": {
-            	"url": "{{ path_for('admin_ajax_types', { 'lang': language.lang, 'collection': collection }) }}",
-            	"dataSrc": "items"
-          	},
-          	"columnDefs": [
-            	{
-                	"targets": [ 0 ],
-                	"visible": false,
-                	"searchable": false
-            	}
-          	],
-          	"columns": [
-              	{ "data": "id" },
-              	{ "data": "name" },
-              	{ "data": "description" },
-              	{
-                	"data": null,
-                	"className": "center",
-                	"defaultContent": '<button type="button" class="type_edit btn btn-success btn-xs"><i class="fas fa-pencil-alt"></i> Edit</button> <button type="button" class="type_remove btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Delete</button>'
-              	}
-          	],
-      	} );
+      var table = $("#types-grid").DataTable({
+        "processing": true,
+        "dom": "Bfrtip",
+        "buttons": [
+          {
+            "text": '<i class="fas fa-plus"></i>',
+            "action": function (e, dt, node, config) {
+              //alert( "Button activated" );
+              showAddDialog(e);
+            },
+            "className": "addType"
+          }
+        ],
+        "ajax": {
+          "url": "{{ path_for('admin_ajax_types', { 'lang': language.lang, 'collection': collection }) }}",
+          "dataSrc": "items"
+        },
+        "columnDefs": [
+          {
+            "targets": [0],
+            "visible": false,
+            "searchable": false
+          }
+        ],
+        "columns": [
+          {
+            "data": "id"
+          },
+          {
+            "data": "name"
+          },
+          {
+            "data": "description"
+          },
+          {
+            "data": null,
+            "className": "center",
+            "defaultContent": '<button type="button" class="type_edit btn btn-success btn-xs"><i class="fas fa-pencil-alt"></i> Edit</button> <button type="button" class="type_remove btn btn-danger btn-xs"><i class="fas fa-trash-alt"></i> Delete</button>'
+          }
+        ],
+      });
 
-      	table.buttons().container().appendTo( '#grid-card-title:eq(0)' );
+      table.buttons().container().appendTo('#grid-card-title:eq(0)');
 
-      	$('#types-grid').on('click', 'button.type_remove', function (e) {
-        	e.preventDefault();
-        	var rowData = table.row( $(this).parents('tr') ).data();
-        	$.ajax({
-            	url : "{{ path_for('admin_ajax_types', { 'lang': language.lang, 'collection': collection }) }}",
-            	type : "DELETE",
-            	data: rowData
-        	}).done(function(result) {
-            	var items = result.items;
-            	$(this).parent().parent().remove();
-            	table.ajax.reload();
-        	});
-      	} );
+      $('#types-grid').on('click', 'button.type_remove', function (e) {
+        e.preventDefault();
+        var rowData = table.row($(this).parents('tr')).data();
+        rowData.csrf_name = "{{csrf.name}}";
+        rowData.csrf_value = "{{csrf.value}}";
+        $.ajax({
+          url: "{{ path_for('admin_ajax_types', { 'lang': language.lang, 'collection': collection }) }}",
+          type: "DELETE",
+          data: rowData
+        }).done(function (result) {
+          var items = result.items;
+          $(this).parent().parent().remove();
+          table.ajax.reload();
+        });
+      });
 
-      	$('#types-grid').on('click', 'button.type_edit', function (e) {
-        	e.preventDefault();
-        	var rowData = table.row( $(this).parents('tr') ).data();
-        	showEditDialog(rowData);
-      	} );
+      $('#types-grid').on('click', 'button.type_edit', function (e) {
+        e.preventDefault();
+        var rowData = table.row($(this).parents('tr')).data();
+        showEditDialog(rowData);
+      });
 
-		var showAddDialog = function(event) {
-      		var m = BootstrapModalWrapperFactory.createAjaxModal({
-	            message: '<div class="text-center">Loading</div>',
-	            closable: true,
-	            title: "Adaugare tip: {{collection}}",
-	            closeByBackdrop: false,
-	            sendId: true, // default is true which send the modal id as a url parameter.
-	            idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
-	            updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
-	            size: "modal-sm",
-	            ajax: {
-	                url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'type' }) }}"
-	            },
-	            localData: {
-	            	action: "add",
-	            	collection: "{{collection}}",
-	                table: table,
-	                funRef: function () {
-	                    alert("running from the modal itself");
-	                }
-	            }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
-	            ajaxContainerReadyEventName: "modal-ajax-updated"
-	        });
-		};
+      var showAddDialog = function (event) {
+        var m = BootstrapModalWrapperFactory.createAjaxModal({
+          message: '<div class="text-center">Loading</div>',
+          closable: true,
+          title: "Adaugare tip: {{collection}}",
+          closeByBackdrop: false,
+          sendId: true, // default is true which send the modal id as a url parameter.
+          idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
+          updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+          size: "modal-sm",
+          ajax: {
+            url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'type' }) }}"
+          },
+          localData: {
+            action: "add",
+            collection: "{{collection}}",
+            table: table,
+            funRef: function () {
+              alert("running from the modal itself");
+            }
+          }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
+          ajaxContainerReadyEventName: "modal-ajax-updated"
+        });
+      };
 
-      	var showEditDialog = function(item) {
-      		var m = BootstrapModalWrapperFactory.createAjaxModal({
-	            message: '<div class="text-center">Loading</div>',
-	            closable: true,
-	            title: "Editare tip: {{collection}}",
-	            closeByBackdrop: false,
-	            sendId: true, // default is true which send the modal id as a url parameter.
-	            idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
-	            updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
-	            size: "modal-sm",
-	            ajax: {
-	                url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'type' }) }}"
-	            },
-	            localData: {
-	            	action: "edit",
-	                collection: "{{collection}}",
-	                table: table,
-	                item: item,
-	                funRef: function () {
-	                    alert("running from the modal itself");
-	                }
-	            }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
-	            ajaxContainerReadyEventName: "modal-ajax-updated"
-	        });
-		};
+      var showEditDialog = function (item) {
+        var m = BootstrapModalWrapperFactory.createAjaxModal({
+          message: '<div class="text-center">Loading</div>',
+          closable: true,
+          title: "Editare tip: {{collection}}",
+          closeByBackdrop: false,
+          sendId: true, // default is true which send the modal id as a url parameter.
+          idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
+          updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+          size: "modal-sm",
+          ajax: {
+            url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'type' }) }}"
+          },
+          localData: {
+            action: "edit",
+            collection: "{{collection}}",
+            table: table,
+            item: item,
+            funRef: function () {
+              alert("running from the modal itself");
+            }
+          }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
+          ajaxContainerReadyEventName: "modal-ajax-updated"
+        });
+      };
 
     });
   </script>

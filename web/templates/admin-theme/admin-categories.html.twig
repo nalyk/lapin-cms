@@ -104,166 +104,171 @@
 
 {% block post_footer_inject %}
   <script>
-    $(document).ready(function() {
-    	
-      var table = $("#categories-grid").DataTable( {
-          "processing": true,
-          "pageLength": 50,
-          "dom": "Bfrtip",
-          "buttons": [
-            {
-              "text": '<i class="fas fa-plus"></i>',
-              "action": function ( e, dt, node, config ) {
-                  //alert( "Button activated" );
-                  showAddDialog();
-              },
-              "className": "addCategory"
-            }
-          ],
-          "ajax": {
-            "url": "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
-            "dataSrc": "items"
-          },
-          "columnDefs": [{
-            targets: [ 1 ],
-            visible: false
-          }],
-          "columns": [
-              { 
-              	"data": "name",
-              	"render": function ( data, type, row ) {
-                  if (typeof row.parrent.name === 'undefined') {
-                    return '<span class="badge badge-primary category-name">'+data+'</span>';
-                  } else {
-                    return '<i class="fas fa-level-up-alt fa-flip-horizontal"></i> <span class="badge badge-secondary subcategory-name">'+row.parrent.name+'</span> | <span class="badge badge-primary category-name">'+data+'</span>';
-                  }
-              	}
-              },
-              { "data": "group" },
-              { "data": "description" },
-              {
-                "data": "visible",
-                "render": function ( data, type, row ) {
-                  if (data == "true") {
-                    return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success" checked>';
-                  } else {
-                    return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
-                  }
-                }
-              },
-              {
-                "data": null,
-                "className": "center",
-                "defaultContent": '<button type="button" class="category_edit btn bg-gradient-success btn-xs"><i class="fas fa-pencil-alt"></i> Edit</button> <button type="button" class="category_remove btn bg-gradient-danger btn-xs"><i class="fas fa-trash-alt"></i> Delete</button>'
+    $(document).ready(function () {
+      var table = $("#categories-grid").DataTable({
+        "processing": true,
+        "pageLength": 50,
+        "dom": "Bfrtip",
+        "buttons": [
+          {
+            "text": '<i class="fas fa-plus"></i>',
+            "action": function (e, dt, node, config) {
+              //alert( "Button activated" );
+              showAddDialog();
+            },
+            "className": "addCategory"
+          }
+        ],
+        "ajax": {
+          "url": "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+          "dataSrc": "items"
+        },
+        "columnDefs": [{
+          targets: [1],
+          visible: false
+        }],
+        "columns": [
+          {
+            "data": "name",
+            "render": function (data, type, row) {
+              if (typeof row.parrent.name === 'undefined') {
+                return '<span class="badge badge-primary category-name">' + data + '</span>';
+              } else {
+                return '<i class="fas fa-level-up-alt fa-flip-horizontal"></i> <span class="badge badge-secondary subcategory-name">' + row.parrent.name + '</span> | <span class="badge badge-primary category-name">' + data + '</span>';
               }
-          ],
-          "order": [[ 1, "asc" ]],
-          "orderFixed": [1, 'asc'],
-      } );
+            }
+          },
+          {
+            "data": "group"
+          },
+          {
+            "data": "description"
+          },
+          {
+            "data": "visible",
+            "render": function (data, type, row) {
+              if (data == "true") {
+                return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success" checked>';
+              } else {
+                return '<input class="category_visible" type="checkbox" name="tableVisibleCategory" data-bootstrap-switch data-off-color="danger" data-on-color="success">';
+              }
+            }
+          },
+          {
+            "data": null,
+            "className": "center",
+            "defaultContent": '<button type="button" class="category_edit btn bg-gradient-success btn-xs"><i class="fas fa-pencil-alt"></i> Edit</button> <button type="button" class="category_remove btn bg-gradient-danger btn-xs"><i class="fas fa-trash-alt"></i> Delete</button>'
+          }
+        ],
+        "order": [[1, "asc"]],
+        "orderFixed": [1, 'asc'],
+      });
 
-      table.buttons().container().appendTo( '#grid-card-title:eq(0)' );
-      table.on( 'draw.dt', function () {
-        $("input[data-bootstrap-switch]").each(function(){
+      table.buttons().container().appendTo('#grid-card-title:eq(0)');
+      table.on('draw.dt', function () {
+        $("input[data-bootstrap-switch]").each(function () {
           $(this).bootstrapSwitch('state', $(this).prop('checked'));
         });
       });
 
-      $("input[data-bootstrap-switch]").each(function(){
+      $("input[data-bootstrap-switch]").each(function () {
         $(this).bootstrapSwitch('state', $(this).prop('checked'));
       });
 
       $('#categories-grid').on('click', 'button.category_remove', function (e) {
         e.preventDefault();
-        var rowData = table.row( $(this).parents('tr') ).data();
+        var rowData = table.row($(this).parents('tr')).data();
+        rowData.csrf_name = "{{csrf.name}}";
+        rowData.csrf_value = "{{csrf.value}}";
         $.ajax({
-            url : "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
-            type : "DELETE",
-            data: rowData
-        }).done(function(result) {
-            var items = result.items;
-            $(this).parent().parent().remove();
-            table.ajax.reload();
+          url: "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+          type: "DELETE",
+          data: rowData
+        }).done(function (result) {
+          var items = result.items;
+          $(this).parent().parent().remove();
+          table.ajax.reload();
         });
-      } );
+      });
 
       $('#categories-grid').on('click', 'button.category_edit', function (e) {
         e.preventDefault();
-        var rowData = table.row( $(this).parents('tr') ).data();
+        var rowData = table.row($(this).parents('tr')).data();
         showEditDialog(rowData);
-      } );
+      });
 
-      $('#categories-grid').on('switchChange.bootstrapSwitch', 'input[name="tableVisibleCategory"]', function(event, state) {
-        var rowData = table.row( $(this).parents('tr') ).data();
+      $('#categories-grid').on('switchChange.bootstrapSwitch', 'input[name="tableVisibleCategory"]', function (event, state) {
+        var rowData = table.row($(this).parents('tr')).data();
         var newVisible = state;
         rowData.visible = newVisible;
         delete rowData.createdDate;
         delete rowData.lastModifiedDate;
         delete rowData.createdBy;
         delete rowData.lastModifiedBy;
+        rowData.csrf_name = "{{csrf.name}}";
+        rowData.csrf_value = "{{csrf.value}}";
         $.ajax({
-            url: "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
-            type: "PUT",
-            data: rowData
-        }).done(function(result) {
-            var items = result.items;
-            table.ajax.reload();
+          url: "{{ path_for('admin_ajax_categories', { 'lang': language.lang }) }}",
+          type: "PUT",
+          data: rowData
+        }).done(function (result) {
+          var items = result.items;
+          table.ajax.reload();
         });
       });
 
-      	var showAddDialog = function(event) {
-      		var m = BootstrapModalWrapperFactory.createAjaxModal({
-	            message: '<div class="text-center">Loading</div>',
-	            closable: true,
-	            title: "Adaugare categorie",
-	            closeByBackdrop: false,
-	            sendId: true, // default is true which send the modal id as a url parameter.
-	            idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
-	            updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
-	            size: "modal-sm",
-	            ajax: {
-	                url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'category' }) }}"
-	            },
-	            localData: {
-	            	action: "add",
-	                table: table,
-	                funRef: function () {
-	                    alert("running from the modal itself");
-	                }
-	            }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
-	            ajaxContainerReadyEventName: "modal-ajax-updated"
-	        });
-		};
-		
+      var showAddDialog = function (event) {
+        var m = BootstrapModalWrapperFactory.createAjaxModal({
+          message: '<div class="text-center">Loading</div>',
+          closable: true,
+          title: "Adaugare categorie",
+          closeByBackdrop: false,
+          sendId: true, // default is true which send the modal id as a url parameter.
+          idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
+          updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+          size: "modal-sm",
+          ajax: {
+            url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'category' }) }}"
+          },
+          localData: {
+            action: "add",
+            table: table,
+            funRef: function () {
+              alert("running from the modal itself");
+            }
+          }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
+          ajaxContainerReadyEventName: "modal-ajax-updated"
+        });
+      };
 
-		var showEditDialog = function(item) {
-      		var m = BootstrapModalWrapperFactory.createAjaxModal({
-	            message: '<div class="text-center">Loading</div>',
-	            closable: true,
-	            title: "Editare categorie",
-	            closeByBackdrop: false,
-	            sendId: true, // default is true which send the modal id as a url parameter.
-	            idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
-	            updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
-	            size: "modal-sm",
-	            ajax: {
-	                url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'category' }) }}"
-	            },
-	            localData: {
-	            	action: "edit",
-	                table: table,
-	                item: item,
-	                funRef: function () {
-	                    alert("running from the modal itself");
-	                },
-	                updateGrid: function() {
-	                	updateGrid();
-	                }
-	            }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
-	            ajaxContainerReadyEventName: "modal-ajax-updated"
-	        });
-		};
-		
 
+      var showEditDialog = function (item) {
+        var m = BootstrapModalWrapperFactory.createAjaxModal({
+          message: '<div class="text-center">Loading</div>',
+          closable: true,
+          title: "Editare categorie",
+          closeByBackdrop: false,
+          sendId: true, // default is true which send the modal id as a url parameter.
+          idParameter: "ajaxModalId", // default name for url parameter containing id of the modal is "ajaxModalId"
+          updateSizeAfterDataFetchTo: "modal-sm", // default is "modal-lg" or null for standard or "modal-sm"
+          size: "modal-sm",
+          ajax: {
+            url: "{{ path_for('admin_ajax_modal', { 'lang': language.lang, 'name': 'category' }) }}"
+          },
+          localData: {
+            action: "edit",
+            table: table,
+            item: item,
+            funRef: function () {
+              alert("running from the modal itself");
+            },
+            updateGrid: function () {
+              updateGrid();
+            }
+          }, // Javascript Object kept in the settings object and available from within modal functions by options.localData
+          ajaxContainerReadyEventName: "modal-ajax-updated"
+        });
+      };
     });
   </script>
 {% endblock %}
