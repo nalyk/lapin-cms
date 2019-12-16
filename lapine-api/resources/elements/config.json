@@ -112,6 +112,22 @@
 			"required": false,
 			"id": "modifiedDate",
 			"order": 13
+		},
+		"url": {
+			"name": "url",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "url",
+			"order": 14
+		},
+		"html": {
+			"name": "html",
+			"type": "string",
+			"typeLabel": "string",
+			"required": false,
+			"id": "html",
+			"order": 15
 		}
 	}
 }
