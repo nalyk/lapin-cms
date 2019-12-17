@@ -52,7 +52,7 @@ div.fr-wrapper>div>a {
       <div class="container-fluid">
         <div class="row mt-2">
           <div class="col-md-9">
-            <div class="card sticky-top sticky-subheader">
+            <div class="card rounded-0 sticky-top sticky-subheader">
               <div class="card-body">
                 <h2 class="m-0 text-dark">
                   Articol nou
@@ -101,17 +101,17 @@ div.fr-wrapper>div>a {
 
                     <div class="btn bg-gradient-secondary mb-2">
                         <span><i class="fas fa-upload fa-fw"></i><span class="d-none d-sm-inline"> Din fișiere locale</span></span>
-                        <input type="file" title="Click to add File">
+                        <input type="file" name="featuredImage" title="Click to add File">
                     </div>
 
                     <div class="btn bg-gradient-secondary mb-2">
                         <span><i class="fas fa-cloud-upload-alt fa-fw"></i><span class="d-none d-sm-inline"> De pe web</span></span>
-                        <input type="hidden" title="Click to add URL">
+                        <input type="hidden" name="featuredImage" title="Click to add URL" value="">
                     </div>
 
                     <div class="btn bg-gradient-secondary mb-2">
                         <span><i class="fas fa-photo-video fa-fw"></i></i><span class="d-none d-sm-inline"> Din arhivă</span></span>
-                        <input type="hidden" title="Click to add Media URL">
+                        <input type="hidden" name="featuredImage" title="Click to add Media URL" value="">
                     </div>
                   </div>
                   <div class="col-md-6">
@@ -398,7 +398,11 @@ div.fr-wrapper>div>a {
       });
 
       $('#associated-picture-zone').dmUploader({ //
-        url: '/demo/java-script/upload',
+        extraData: {
+          "csrf_name": "{{csrf.name}}",
+          "csrf_value": "{{csrf.value}}",
+        },
+        url: '/ro/admin/ajax/uploadImage',
         maxFileSize: 15000000, // 3 Megs 
         onDragEnter: function(){
           // Happens when dragging something over the DnD area

@@ -64,6 +64,7 @@ class Settings
         $this->configureDatabase();
         $this->configureMailer();
         $this->configureDeployd();
+        $this->configureMinio();
         $this->configureTwig();
         $this->configureFacebook();
         $this->configureCMS();
@@ -209,6 +210,16 @@ class Settings
 
         $config['dpd']['host']      = getenv('DPD_HOST');
         $config['dpd']['protocol']  = getenv('DPD_PROTOCOL');
+
+        $this->setConfig($config);
+    }
+
+    public function configureMinio()
+    {
+        $config = [];
+
+        $config['minio']['key']      = getenv('S3_KEY');
+        $config['minio']['secret']  = getenv('S3_SECRET');
 
         $this->setConfig($config);
     }

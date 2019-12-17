@@ -440,6 +440,40 @@ class AdminController
         }
     }
 
+    public function ajaxUploadImage($request, $response, $args)
+    {
+        $uploadedFiles = $request->getUploadedFiles();
+        $uploadedImage = $uploadedFiles['file'];
+
+
+        if ($uploadedImage->getError() === UPLOAD_ERR_OK) {
+
+            $filename = $uploadedImage->getClientFilename();
+            $prefolder = date("Y-m");
+            $timestamp = time();
+
+            $uploadURI = $prefolder."/".$timestamp."-".$this->slugify->slugify($filename);
+
+            $upload = $this->container->minio->putObject([
+                'Bucket' => 'yoda',
+                'Key'    => $uploadURI,
+                'SourceFile' => $uploadedImage->file
+            ]);
+
+            $plainUrl = $this->container->minio->getObjectUrl('yoda', $uploadURI);
+
+            $data["_status"] = true;
+            $data["filename"] = $filename;
+            $data["plainUrl"] = $plainUrl;
+        } else {
+            $data["_status"] = false;
+        }
+        
+        return $response->withStatus(200)
+        ->withHeader('Content-Type', 'application/json')
+        ->write(json_encode($data));
+    }
+
     public function getTypes()
     {
         $cms = $this->container['settings']['cms'];

@@ -55,6 +55,7 @@ class ContainerServices
         $this->registerDatabase();
         $this->registerEloquent();
         $this->registerDeployd();
+        $this->registerMinio();
         $this->registerMailer();
         $this->registerGuzzle();
         $this->registerSerializer();
@@ -187,6 +188,25 @@ class ContainerServices
             $deployd = new \App\Model\Core\Deployd($this->container);
 
             return $deployd;
+        });
+    }
+
+    public function registerMinio()
+    {
+        $this->registerService('minio', function () {
+            $s3 = $this->container['settings']['minio'];
+            $minio = new \Aws\S3\S3Client([
+                'version' => 'latest',
+                'region'  => 'us-east-1',
+                'endpoint' => 'https://s3.yoda.md/',
+                'use_path_style_endpoint' => true,
+                'credentials' => [
+                    'key'    => $s3["key"],
+                    'secret' => $s3["secret"],
+                ],
+            ]);
+
+            return $minio;
         });
     }
 
